@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AquaBank Rwanda &mdash; Store Now, Never Run Dry</title>
+<meta name="description" content="AquaBank Rwanda captures rainwater and delivers safe, quality-tested water to households and businesses across Kigali.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="#home" class="nav-logo">
+      <div class="logo-drop">&#128167;</div>
+      <span>AquaBank <span class="logo-rw">Rwanda</span></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#solutions">Solutions</a></li>
+      <li><a href="#business-model">Business Model</a></li>
+      <li><a href="#impact">Impact</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="notif-btn" id="notifBtn" style="display:none" onclick="toggleNotif()">
+        &#128276;<span class="notif-badge" id="notifCount">3</span>
+      </button>
+      <div class="user-menu" id="userMenuWrap" style="display:none">
+        <div class="user-avatar" id="userAvatar" onclick="toggleUserMenu()">AB</div>
+        <div class="user-dropdown" id="userDropdown">
+          <div class="user-dropdown-header">
+            <div class="uname" id="ddName">Customer</div>
+            <div class="uemail" id="ddEmail">&mdash;</div>
+          </div>
+          <a onclick="openDashboard()">&#128202; My Dashboard</a>
+          <a onclick="openModal('orderModal')">&#128688; Order Water</a>
+          <a onclick="openModal('trackModal')">&#128205; Track Delivery</a>
+          <a onclick="openModal('creditsModal')">&#128167; Water Credits</a>
+          <a onclick="openModal('subModal')">&#128197; Subscription</a>
+          <button class="logout-btn" onclick="logout()">&#128682; Log Out</button>
+        </div>
+      </div>
+      <div id="guestBtns">
+        <button class="btn-ghost" onclick="openModal('authModal')">Log In</button>
+        <button class="btn btn-primary btn-sm" onclick="openAuthTab('register')">Sign Up Free</button>
+      </div>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="notif-dropdown" id="notifDropdown">
+  <div class="notif-header">
+    <h4>Notifications</h4>
+    <button class="notif-clear" onclick="clearNotifs()">Mark all read</button>
+  </div>
+  <div class="notif-list" id="notifList"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="wave-anim"></div>
+  <div class="wave-anim"></div>
+  <div class="wave-anim"></div>
+  <div class="hero-content">
+    <div class="hero-badge">&#127757; Kigali, Rwanda</div>
+    <h1 class="hero-title">Store Now,<br><span class="gradient-text">Never Run Dry.</span></h1>
+    <p class="hero-tagline">Need Water? We&rsquo;ve Got You Covered.</p>
+    <p class="hero-sub">AquaBank Rwanda captures and stores water during rainy seasons, then delivers safe, quality-tested water when Kigali needs it most.</p>
+    <div class="hero-actions">
+      <button class="hero-action-card featured" onclick="openModal('orderModal')">
+        <span class="hac-icon">&#128688;</span><span class="hac-label">Order Water</span>
+      </button>
+      <button class="hero-action-card" onclick="openModal('kioskModal')">
+        <span class="hac-icon">&#128205;</span><span class="hac-label">Find a Kiosk</span>
+      </button>
+      <button class="hero-action-card" onclick="openModal('trackModal')">
+        <span class="hac-icon">&#128666;</span><span class="hac-label">Check Delivery</span>
+      </button>
+      <button class="hero-action-card" onclick="openAuthTab('register')">
+        <span class="hac-icon">&#128100;</span><span class="hac-label">Become a Customer</span>
+      </button>
+    </div>
+    <div class="hero-links">
+      <a href="#how-it-works" class="btn btn-outline-white btn-lg">Learn How It Works</a>
+      <button class="btn btn-outline-white btn-lg" onclick="openModal('b2bModal')">B2B Enquiry</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-pill"><span class="stat-pill-icon">&#127783;&#65039;</span> Rainwater Capture</div>
+      <div class="stat-pill"><span class="stat-pill-icon">&#127959;&#65039;</span> Safe Storage</div>
+      <div class="stat-pill"><span class="stat-pill-icon">&#9989;</span> Quality Tested</div>
+      <div class="stat-pill"><span class="stat-pill-icon">&#128688;</span> Smart Distribution</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section" id="problem">
+  <div class="container">
+    <div class="eyebrow">The Challenge</div>
+    <h2 class="section-title">Kigali Has Water When It Rains.<br>But What Happens When It Doesn&rsquo;t?</h2>
+    <p class="section-lead">Kigali experiences heavy seasonal rainfall, yet dry-season shortages leave households and businesses without reliable water. Our analysis identifies an estimated <strong>65,000 m&sup3;/day supply gap</strong> in Kigali&rsquo;s water system.</p>
+    <div class="grid-3">
+      <div class="card reveal"><div class="card-icon icon-red">&#127797;</div><h3>Seasonal Water Shortages</h3><p>Dry seasons bring acute water scarcity, forcing families and businesses to seek expensive or unsafe alternatives.</p></div>
+      <div class="card reveal reveal-d1"><div class="card-icon icon-orange">&#127754;</div><h3>Rainwater Runoff Waste</h3><p>Millions of litres of rainwater flow unused into drains every rainy season &mdash; a massive untapped resource.</p></div>
+      <div class="card reveal reveal-d2"><div class="card-icon icon-blue">&#127961;&#65039;</div><h3>Growing Urban Demand</h3><p>Kigali&rsquo;s rapid urbanisation is outpacing water infrastructure, widening the gap between supply and demand.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="section bg-dark" id="solutions">
+  <div class="container">
+    <div class="eyebrow light">Our Solution</div>
+    <h2 class="section-title light">Turning Water Abundance<br>Into Water Security</h2>
+    <p class="section-lead light">AquaBank Rwanda bridges Kigali&rsquo;s seasonal water gap &mdash; capturing abundance during the wet season and delivering safe, tested water when it&rsquo;s needed most.</p>
+    <div class="process-row">
+      <div class="process-card reveal">
+        <div class="process-num">01 &mdash; CAPTURE</div>
+        <div class="process-icon">&#127783;&#65039;</div>
+        <h3>Capture</h3>
+        <p>Rooftop gutters, surface channels, and permitted surplus treated-water intake points collect rainwater during Kigali&rsquo;s wet seasons before it runs off unused.</p>
+      </div>
+      <div class="process-arrow">&#8594;</div>
+      <div class="process-card reveal reveal-d1">
+        <div class="process-num">02 &mdash; STORE</div>
+        <div class="process-icon">&#127959;&#65039;</div>
+        <h3>Store</h3>
+        <p>Water is held in sealed, certified storage tanks at secure sites across the city, buffering supply so households and businesses have access even in the dry season.</p>
+      </div>
+      <div class="process-arrow">&#8594;</div>
+      <div class="process-card reveal reveal-d2">
+        <div class="process-num">03 &mdash; FILTER / DISINFECT / TEST</div>
+        <div class="process-icon">&#128300;</div>
+        <h3>Filter, Disinfect &amp; Test</h3>
+        <p>Stored water passes through filtration, disinfection, and quality testing &mdash; checking turbidity, pH and chlorine &mdash; before it is cleared for distribution.</p>
+      </div>
+      <div class="process-arrow">&#8594;</div>
+      <div class="process-card reveal reveal-d3">
+        <div class="process-num">04 &mdash; DISTRIBUTE</div>
+        <div class="process-icon">&#128688;</div>
+        <h3>Distribute</h3>
+        <p>Tested water is delivered via kiosks, scheduled trucks, and smart-metered connections &mdash; reaching households, businesses and institutions across Kigali.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section class="section" id="solutions-customers">
+  <div class="container">
+    <div class="eyebrow">Who We Serve</div>
+    <h2 class="section-title">Water Solutions for Every Customer</h2>
+    <p class="section-lead">From individual households to large institutions, AquaBank Rwanda delivers reliable water to those who need it most.</p>
+    <div class="grid-4">
+      <div class="card serve-card reveal"><div class="card-icon icon-blue">&#127968;</div><h3>Households</h3><p>Reliable water access for families experiencing seasonal shortages and unreliable supply.</p><button class="btn btn-outline-blue btn-sm" onclick="openModal('orderModal')">Order Water</button></div>
+      <div class="card serve-card reveal reveal-d1"><div class="card-icon icon-teal">&#127869;&#65039;</div><h3>Salons, Restaurants &amp; Laundromats</h3><p>Consistent daily water supply for businesses that cannot afford interruptions.</p><button class="btn btn-outline-blue btn-sm" onclick="openModal('orderModal')">Order Water</button></div>
+      <div class="card serve-card reveal reveal-d2"><div class="card-icon icon-green">&#127979;</div><h3>Schools</h3><p>Safe, reliable water for institutions serving students and staff every day.</p><button class="btn btn-outline-blue btn-sm" onclick="openModal('orderModal')">Order Water</button></div>
+      <div class="card serve-card reveal reveal-d3"><div class="card-icon icon-purple">&#127970;</div><h3>Residential Buildings</h3><p>High-volume water solutions for multi-unit buildings and property managers.</p><button class="btn btn-outline-blue btn-sm" onclick="openModal('orderModal')">Order Water</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section bg-light" id="how-it-works">
+  <div class="container">
+    <div class="eyebrow">How It Works</div>
+    <h2 class="section-title">Simple, Smart, Reliable</h2>
+    <div class="how-grid">
+      <div class="card how-card reveal">
+        <div class="how-icon">&#128241;</div><h3>Prepaid Kiosk Access</h3>
+        <p>Purchase water credits using <strong>Mobile Money</strong> or <strong>Cash</strong>. Smart meters track your usage in real time.</p>
+        <div class="how-tags"><span class="tag">Mobile Money</span><span class="tag">Cash</span><span class="tag">Smart Metering</span></div>
+      </div>
+      <div class="card how-card reveal reveal-d1">
+        <div class="how-icon">&#128666;</div><h3>Scheduled Deliveries</h3>
+        <p>Book regular water delivery slots that fit your schedule. Routes are optimised by neighbourhood for efficiency.</p>
+        <div class="how-tags"><span class="tag">Flexible Scheduling</span><span class="tag">Route Optimised</span></div>
+      </div>
+      <div class="card how-card reveal reveal-d2">
+        <div class="how-icon">&#128300;</div><h3>Quality Assurance</h3>
+        <div class="quality-list">
+          <div class="quality-row"><span class="q-check">&#10003;</span> Turbidity</div>
+          <div class="quality-row"><span class="q-check">&#10003;</span> pH Level</div>
+          <div class="quality-row"><span class="q-check">&#10003;</span> Chlorine</div>
+          <div class="quality-row"><span class="q-check">&#10003;</span> Maintenance Logs</div>
+        </div>
+        <div class="quality-badge">&#128167; Water Quality Checked</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS MODEL -->
+<section class="section" id="business-model">
+  <div class="container">
+    <div class="eyebrow">Revenue Model</div>
+    <h2 class="section-title">A Diversified Business Model</h2>
+    <p class="section-lead">Multiple revenue streams ensure financial sustainability while keeping water accessible and affordable.</p>
+    <div class="grid-4">
+      <div class="card reveal"><div class="card-icon icon-blue">&#128167;</div><h3>Pay-Per-Litre</h3><p>Customers pay for water collected at kiosks or delivered directly to their location.</p></div>
+      <div class="card reveal reveal-d1"><div class="card-icon icon-teal">&#128666;</div><h3>Delivery Fees</h3><p>Transparent fees for scheduled water deliveries, optimised by route and volume.</p></div>
+      <div class="card reveal reveal-d2"><div class="card-icon icon-green">&#128197;</div><h3>Household Subscriptions</h3><p>Monthly packages provide households with predictable water access and recurring revenue.</p></div>
+      <div class="card reveal reveal-d3"><div class="card-icon icon-purple">&#127970;</div><h3>B2B Contracts</h3><p>Volume-based contracts for businesses, schools and institutions requiring consistent supply.</p></div>
+    </div>
+    <div class="partnership-strip reveal">
+      <div class="ps-icon">&#129309;</div>
+      <div><h3>Public Partnerships &amp; Subsidies</h3><p>Potential partnerships with WASAC, district authorities and development programmes to extend reach and reduce costs for vulnerable communities.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS PLAN FOUNDATION -->
+<section class="section bg-light" id="research">
+  <div class="container">
+    <div class="eyebrow">Business plan foundation</div>
+    <h2 class="section-title">A realistic view of Kigali's water challenge</h2>
+    <div class="callout-box">
+      <span class="badge badge-blue">Important</span>
+      <p><strong>Verified caution:</strong> the often-cited 65,000 m³/day supply gap should be treated as a planning assumption until verified against official WASAC, Rwanda Water Resources Board and Kigali municipal network data.</p>
+    </div>
+    <div class="research-grid">
+      <article class="info-card reveal">
+        <span class="info-tag">Verified facts</span>
+        <h3>Kigali's demand is rising</h3>
+        <p>Urban expansion, densification and rising household/commercial demand continue to place pressure on water access and service reliability in Kigali.</p>
+      </article>
+      <article class="info-card reveal reveal-d1">
+        <span class="info-tag">Research findings</span>
+        <h3>Seasonality is the key challenge</h3>
+        <p>Rainfall can be substantial in wetter periods, but the gap between rainy-season abundance and dry-season scarcity is a major urban water challenge.</p>
+      </article>
+      <article class="info-card reveal reveal-d2">
+        <span class="info-tag">Assumption</span>
+        <h3>There is measurable unmet demand</h3>
+        <p>AquaBank assumes a meaningful gap between reliable water supply and actual demand among households, businesses and institutions in selected Kigali zones.</p>
+      </article>
+      <article class="info-card reveal reveal-d3">
+        <span class="info-tag">Forecast</span>
+        <h3>Storage and delivery creates value</h3>
+        <p>Where supply is unreliable, predictable storage, quality testing and scheduled delivery become a commercially valuable service.</p>
+      </article>
+    </div>
+    <div class="source-strip">
+      <span>Source references:</span>
+      <div class="source-chips">
+        <span>WASAC</span>
+        <span>Rwanda Water Resources Board</span>
+        <span>World Bank</span>
+        <span>WHO</span>
+        <span>UN-Habitat</span>
+        <span>Rwanda statistics</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="market-segmentation">
+  <div class="container">
+    <div class="eyebrow">Target market</div>
+    <h2 class="section-title">Customer personas for Kigali</h2>
+    <div class="persona-grid">
+      <article class="persona-card reveal">
+        <div class="persona-head"><span class="persona-icon">🏠</span><h3>Low/middle-income households</h3></div>
+        <ul>
+          <li><strong>Problem:</strong> inconsistent access during dry periods.</li>
+          <li><strong>Current solution:</strong> daily purchase, storage, or intermittent supply.</li>
+          <li><strong>Need:</strong> around 100–500 L per day depending on family needs.</li>
+          <li><strong>Why AquaBank:</strong> predictable delivery and transparent pricing.</li>
+        </ul>
+      </article>
+      <article class="persona-card reveal reveal-d1">
+        <div class="persona-head"><span class="persona-icon">💇</span><h3>Salons</h3></div>
+        <ul>
+          <li><strong>Problem:</strong> daily operations depend on reliable water.</li>
+          <li><strong>Current solution:</strong> tanker purchases or storage tanks.</li>
+          <li><strong>Need:</strong> 300–1,000 L daily.</li>
+          <li><strong>Why AquaBank:</strong> dependable supply reduces service disruptions.</li>
+        </ul>
+      </article>
+      <article class="persona-card reveal reveal-d2">
+        <div class="persona-head"><span class="persona-icon">🍽️</span><h3>Restaurants</h3></div>
+        <ul>
+          <li><strong>Problem:</strong> water is essential for kitchen, cleaning and sanitation.</li>
+          <li><strong>Current solution:</strong> informal bulk purchase and local storage.</li>
+          <li><strong>Need:</strong> 500–2,000 L daily.</li>
+          <li><strong>Why AquaBank:</strong> recurring supply supports health and operations.</li>
+        </ul>
+      </article>
+      <article class="persona-card reveal reveal-d3">
+        <div class="persona-head"><span class="persona-icon">🧺</span><h3>Laundromats</h3></div>
+        <ul>
+          <li><strong>Problem:</strong> very high load and interruption risk.</li>
+          <li><strong>Current solution:</strong> emergency bulk buying or local storage.</li>
+          <li><strong>Need:</strong> 1,000–5,000 L daily.</li>
+          <li><strong>Why AquaBank:</strong> volume-based contracts fit this customer type.</li>
+        </ul>
+      </article>
+      <article class="persona-card reveal">
+        <div class="persona-head"><span class="persona-icon">🏫</span><h3>Schools</h3></div>
+        <ul>
+          <li><strong>Problem:</strong> water access supports sanitation and daily operations.</li>
+          <li><strong>Current solution:</strong> public water, emergency storage or tanker supply.</li>
+          <li><strong>Need:</strong> 1,000–10,000 L depending on size.</li>
+          <li><strong>Why AquaBank:</strong> safer, traceable supply supports trust.</li>
+        </ul>
+      </article>
+      <article class="persona-card reveal reveal-d1">
+        <div class="persona-head"><span class="persona-icon">🏢</span><h3>Apartment buildings</h3></div>
+        <ul>
+          <li><strong>Problem:</strong> multiple residents share one unreliable supply.</li>
+          <li><strong>Current solution:</strong> backup tanks or emergency bulk purchases.</li>
+          <li><strong>Need:</strong> high and variable daily demand.</li>
+          <li><strong>Why AquaBank:</strong> managed storage and delivery lowers outage risk.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-light" id="competition">
+  <div class="container">
+    <div class="eyebrow">Competitive landscape</div>
+    <h2 class="section-title">Competitor matrix for Kigali</h2>
+    <div class="table-wrap">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Alternative</th>
+            <th>Price</th>
+            <th>Availability</th>
+            <th>Reliability</th>
+            <th>Target customer</th>
+            <th>Strengths</th>
+            <th>Weaknesses</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Public supply</td>
+            <td>Low nominal cost</td>
+            <td>City-wide but uneven</td>
+            <td>Variable</td>
+            <td>Households and institutions</td>
+            <td>Established network</td>
+            <td>Intermittent service and low predictability</td>
+          </tr>
+          <tr>
+            <td>Tanker delivery</td>
+            <td>Higher and ad hoc</td>
+            <td>Need-based</td>
+            <td>Moderate</td>
+            <td>Homes and businesses</td>
+            <td>Fast response</td>
+            <td>Price volatility and weaker consistency</td>
+          </tr>
+          <tr>
+            <td>Water kiosks</td>
+            <td>Moderate</td>
+            <td>Local access</td>
+            <td>Variable</td>
+            <td>Households and small businesses</td>
+            <td>Convenient</td>
+            <td>Quality and consistency can vary</td>
+          </tr>
+          <tr>
+            <td>Bottled water</td>
+            <td>High per litre</td>
+            <td>Urban availability</td>
+            <td>High</td>
+            <td>Emergency and small-use customers</td>
+            <td>Portable and trusted</td>
+            <td>Too expensive for large-volume use</td>
+          </tr>
+          <tr>
+            <td>AquaBank Rwanda</td>
+            <td>Pay-per-litre + plans</td>
+            <td>Neighbourhood service</td>
+            <td>High with quality controls</td>
+            <td>Households, businesses, schools</td>
+            <td>Storage, testing and recurring service</td>
+            <td>Operational discipline must be proven</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="competitive-advantage reveal">
+      <h3>Competitive advantage</h3>
+      <p>AquaBank's edge is in <strong>water security</strong>. By storing seasonal surplus, testing quality consistently and delivering via planned logistics, it reduces downtime and builds trust in a market where reliability is often the core problem.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="system">
+  <div class="container">
+    <div class="eyebrow">Operational system</div>
+    <h2 class="section-title">The AquaBank flow</h2>
+    <div class="flow-rail">
+      <div class="flow-step"><span>Rainwater / surplus water</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span>Capture</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span>Pre-filtration</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span>Storage</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span>Filtration</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span>Disinfection</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span>Quality testing</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span>Smart metering</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span>Kiosk / delivery / connection</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span>Customer</span></div>
+    </div>
+    <div class="equipment-grid">
+      <div class="equipment-card reveal"><h3>Capture & movement</h3><p>Gutters, rooftop channels, pipes, pumps and transfer lines move stored rainwater into containment.</p></div>
+      <div class="equipment-card reveal reveal-d1"><h3>Storage & safety</h3><p>Secure tanks, overflows and lockable access points reduce contamination and system loss.</p></div>
+      <div class="equipment-card reveal reveal-d2"><h3>Treatment & testing</h3><p>Filters, chlorination or UV disinfection and routine pH/turbidity checks keep the water safe.</p></div>
+      <div class="equipment-card reveal reveal-d3"><h3>Distribution</h3><p>Smart meters, kiosks and delivery vehicles ensure traceable supply to paying customers.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-light" id="compliance">
+  <div class="container">
+    <div class="eyebrow">Water safety</div>
+    <h2 class="section-title">Quality and compliance framework</h2>
+    <div class="two-col">
+      <div class="panel-box reveal">
+        <h3>Confirmed requirements to verify</h3>
+        <ul class="check-list">
+          <li>Applicable drinking-water standards and public-health rules.</li>
+          <li>Safe storage and treatment practices for harvested water.</li>
+          <li>Routine testing for turbidity, pH, chlorine residual and contamination indicators.</li>
+          <li>Documented maintenance and quality records before public sale.</li>
+        </ul>
+      </div>
+      <div class="panel-box reveal reveal-d1">
+        <h3>What still needs authority confirmation</h3>
+        <ul class="check-list">
+          <li>Exact licensing and permit requirements for a private water-distribution venture.</li>
+          <li>Rules around permitted surplus treated water use.</li>
+          <li>Laboratory testing frequency and reporting obligations.</li>
+          <li>Requirements for kiosks and mobile deliveries.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="financial-model">
+  <div class="container">
+    <div class="eyebrow">Financial model</div>
+    <h2 class="section-title">Three-scenario forecast</h2>
+    <div class="scenario-grid">
+      <article class="scenario-card reveal">
+        <span class="badge badge-gray">Conservative</span>
+        <h3>Steady pilot</h3>
+        <p>Lower adoption and longer ramp-up, but a dependable path to revenue proof.</p>
+        <ul>
+          <li>Lower tank utilisation</li>
+          <li>Reduced B2B uptake</li>
+          <li>Longer payback</li>
+        </ul>
+      </article>
+      <article class="scenario-card highlight reveal reveal-d1">
+        <span class="badge badge-blue">Expected</span>
+        <h3>Balanced launch</h3>
+        <p>Strong household and SME demand plus disciplined operations.</p>
+        <ul>
+          <li>Steady recurring revenue</li>
+          <li>Efficient route planning</li>
+          <li>Clear break-even path</li>
+        </ul>
+      </article>
+      <article class="scenario-card reveal reveal-d2">
+        <span class="badge badge-green">Optimistic</span>
+        <h3>Rapid scale-up</h3>
+        <p>High adoption and strategic partnerships accelerate growth.</p>
+        <ul>
+          <li>More B2B contracts</li>
+          <li>Higher retention</li>
+          <li>Faster expansion</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-light" id="pilot">
+  <div class="container">
+    <div class="eyebrow">Pilot plan</div>
+    <h2 class="section-title">First pilot for Kigali</h2>
+    <div class="pilot-grid">
+      <div class="panel-box reveal">
+        <h3>Pilot location criteria</h3>
+        <ul class="check-list">
+          <li>High-density area with recurring supply interruptions</li>
+          <li>Strong households and small-business demand</li>
+          <li>Good access for storage and truck delivery</li>
+          <li>Visible area for kiosk trust and marketing</li>
+        </ul>
+      </div>
+      <div class="panel-box reveal reveal-d1">
+        <h3>Pilot economics</h3>
+        <ul class="check-list">
+          <li>Target: 200–400 households or equivalent mixed customers</li>
+          <li>1–2 kiosks and 3–6 storage tanks in a controlled zone</li>
+          <li>3–6 month live test with measurement and safety monitoring</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="roadmap">
+  <div class="container">
+    <div class="eyebrow">Implementation roadmap</div>
+    <h2 class="section-title">Pilot → Prove → Expand</h2>
+    <div class="roadmap-grid">
+      <article class="roadmap-card reveal">
+        <span class="phase-badge">Phase 1</span>
+        <h3>Pilot</h3>
+        <p>Validate demand, pricing, water safety and route efficiency.</p>
+        <small>6–9 months</small>
+      </article>
+      <article class="roadmap-card reveal reveal-d1">
+        <span class="phase-badge">Phase 2</span>
+        <h3>Prove</h3>
+        <p>Measure KPIs and show financial viability with real customer data.</p>
+        <small>9–12 months</small>
+      </article>
+      <article class="roadmap-card reveal reveal-d2">
+        <span class="phase-badge">Phase 3</span>
+        <h3>Expand</h3>
+        <p>Scale to new Kigali service zones and regional extensions.</p>
+        <small>12–24 months</small>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-light" id="kpis">
+  <div class="container">
+    <div class="eyebrow">KPI dashboard</div>
+    <h2 class="section-title">Measured performance</h2>
+    <div class="kpi-grid">
+      <div class="kpi-box reveal"><strong>50,000+</strong><span>Litres captured monthly in pilot</span></div>
+      <div class="kpi-box reveal reveal-d1"><strong>85%</strong><span>Water-quality compliance target</span></div>
+      <div class="kpi-box reveal reveal-d2"><strong>500</strong><span>Customer target after scale</span></div>
+      <div class="kpi-box reveal reveal-d3"><strong>90%</strong><span>Customer retention target</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="investor-deck">
+  <div class="container">
+    <div class="eyebrow">Investor snapshot</div>
+    <h2 class="section-title">Presentation themes</h2>
+    <div class="slide-stack">
+      <article class="slide-card reveal"><span>Slide 1</span><h3>Executive Summary</h3><p>AquaBank Rwanda addresses Kigali's water resilience gap with a storage, treatment and distribution model.</p></article>
+      <article class="slide-card reveal reveal-d1"><span>Slide 2</span><h3>Water Problem</h3><p>Urban growth and supply variability create a need for dependable, resilient water access.</p></article>
+      <article class="slide-card reveal reveal-d2"><span>Slide 3</span><h3>Market Opportunity</h3><p>Households, salons, restaurants, laundromats, and schools represent a strong demand base.</p></article>
+      <article class="slide-card reveal reveal-d3"><span>Slide 4</span><h3>Solution</h3><p>Capture, store, test and distribute water with a practical, measurable operating model.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-dark" id="final-check">
+  <div class="container">
+    <div class="eyebrow light">Final quality check</div>
+    <h2 class="section-title light">What still needs to be verified in the real world</h2>
+    <div class="two-col">
+      <div class="panel-box panel-box-dark reveal">
+        <h3>Authority and regulatory confirmation</h3>
+        <ul class="check-list check-list-light">
+          <li>Licensing and inspections for water-distribution businesses.</li>
+          <li>Rainwater harvesting and storage rules for urban sites.</li>
+          <li>Water testing frequency and reporting obligations.</li>
+          <li>Regulations for surplus treated water reuse.</li>
+        </ul>
+      </div>
+      <div class="panel-box panel-box-dark reveal reveal-d1">
+        <h3>Operational validation</h3>
+        <ul class="check-list check-list-light">
+          <li>Actual service interruptions and customer demand patterns.</li>
+          <li>Supplier pricing for infrastructure and smart technology.</li>
+          <li>Engineering requirements for installation and maintenance.</li>
+          <li>Water-quality results from pilot operations.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GO-TO-MARKET -->
+<section class="section bg-light" id="gtm">
+  <div class="container">
+    <div class="eyebrow">Strategy</div>
+    <h2 class="section-title">Go-To-Market Strategy</h2>
+    <div class="timeline">
+      <div class="tl-item reveal"><div class="tl-dot">1</div><div class="tl-content card"><h3>&#128640; Pilot</h3><p>Launch in a high-density, water-stressed neighbourhood in Kigali. Establish kiosks, install tanks and onboard early customers.</p></div></div>
+      <div class="tl-item reveal reveal-d1"><div class="tl-dot">2</div><div class="tl-content card"><h3>&#128202; Prove</h3><p>Measure demand, pricing, operational performance and customer satisfaction. Refine the model based on real data.</p></div></div>
+      <div class="tl-item reveal reveal-d2"><div class="tl-dot">3</div><div class="tl-content card"><h3>&#128200;</h3><p>Replicate the proven model across Kigali and eventually scale beyond Kigali to other water-stressed urban areas in Rwanda.</p></div></div>
+    </div>
+    <div class="community-wrap">
+      <h3>Community Engagement</h3>
+      <div class="community-tags">
+        <span class="tag-lg">&#127979; Schools</span>
+        <span class="tag-lg">&#128717; Markets</span>
+        <span class="tag-lg">&#127963;&#65039; Community Centres</span>
+        <span class="tag-lg">&#128101; Local Leaders</span>
+        <span class="tag-lg">&#127973; Health Workers</span>
+        <span class="tag-lg">&#127968; Property Owners</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="section bg-dark" id="partners">
+  <div class="container">
+    <div class="eyebrow light">Ecosystem</div>
+    <h2 class="section-title light">Our Partners</h2>
+    <div class="grid-3">
+      <div class="card-dark reveal"><div style="font-size:2rem;margin-bottom:14px;">&#127963;&#65039;</div><h3>WASAC</h3><p>Regulatory alignment and potential technical support from Rwanda&rsquo;s national water authority.</p></div>
+      <div class="card-dark reveal reveal-d1"><div style="font-size:2rem;margin-bottom:14px;">&#128506;&#65039;</div><h3>District Authorities</h3><p>Site permits, community access and local government collaboration.</p></div>
+      <div class="card-dark reveal reveal-d2"><div style="font-size:2rem;margin-bottom:14px;">&#127968;</div><h3>Property Owners</h3><p>Rooftop catchment systems and tank-hosting agreements on private and commercial properties.</p></div>
+      <div class="card-dark reveal"><div style="font-size:2rem;margin-bottom:14px;">&#127758;</div><h3>NGOs &amp; Development Partners</h3><p>Co-investment, capacity building and access to underserved communities.</p></div>
+      <div class="card-dark reveal reveal-d1"><div style="font-size:2rem;margin-bottom:14px;">&#9881;&#65039;</div><h3>Suppliers</h3><p>Tanks, pumps and water-treatment equipment from certified suppliers.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT DASHBOARD -->
+<section class="section" id="impact">
+  <div class="container">
+    <div class="eyebrow">Impact</div>
+    <h2 class="section-title">Impact Dashboard</h2>
+    <p class="section-lead">Pilot target metrics &mdash; demo data. Real figures will be published once operations begin.</p>
+    <div class="kpi-row">
+      <div class="kpi-card reveal"><div class="kpi-val" data-target="50000">0</div><div class="kpi-unit">m&sup3;</div><div class="kpi-lbl">Water Captured</div><div class="kpi-note">Pilot Target</div></div>
+      <div class="kpi-card reveal reveal-d1"><div class="kpi-val" data-target="42000">0</div><div class="kpi-unit">m&sup3;</div><div class="kpi-lbl">Water Distributed</div><div class="kpi-note">Pilot Target</div></div>
+      <div class="kpi-card reveal reveal-d2"><div class="kpi-val" data-target="1200">0</div><div class="kpi-unit">+</div><div class="kpi-lbl">Active Customers</div><div class="kpi-note">Pilot Target</div></div>
+      <div class="kpi-card reveal reveal-d3"><div class="kpi-val" data-target="85">0</div><div class="kpi-unit">%</div><div class="kpi-lbl">Customer Retention</div><div class="kpi-note">Demo Data</div></div>
+    </div>
+    <div class="charts-row">
+      <div class="card chart-card"><h4>Water Captured vs Distributed (m&sup3;) &mdash; Demo Data</h4><canvas id="waterChart"></canvas></div>
+      <div class="card chart-card"><h4>Customers Served by Type &mdash; Demo Data</h4><canvas id="customerChart"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- SUSTAINABILITY -->
+<section class="section bg-light" id="sustainability">
+  <div class="container">
+    <div class="eyebrow">Sustainability</div>
+    <h2 class="section-title">Building a More Water-Resilient Kigali</h2>
+    <div class="impact-grid">
+      <div class="impact-tile reveal"><span class="ti-icon">&#9851;&#65039;</span><p>Reduce wasted rainy-season runoff</p></div>
+      <div class="impact-tile reveal reveal-d1"><span class="ti-icon">&#128167;</span><p>Improve access to reliable water</p></div>
+      <div class="impact-tile reveal reveal-d2"><span class="ti-icon">&#129309;</span><p>Support vulnerable urban communities</p></div>
+      <div class="impact-tile reveal reveal-d3"><span class="ti-icon">&#127978;</span><p>Help small businesses maintain operations</p></div>
+      <div class="impact-tile reveal"><span class="ti-icon">&#128737;&#65039;</span><p>Improve water resilience across Kigali</p></div>
+      <div class="impact-tile reveal reveal-d1"><span class="ti-icon">&#128218;</span><p>Encourage responsible water use</p></div>
+      <div class="impact-tile reveal reveal-d2"><span class="ti-icon">&#127807;</span><p>Support sustainable urban development</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section bg-dark" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="eyebrow light">About Us</div>
+        <h2 class="section-title light">About AquaBank Rwanda</h2>
+        <p class="about-body">AquaBank Rwanda is an innovative water-resilience venture designed to connect rainy-season water abundance with dry-season demand in Kigali. We believe that water security is not a luxury &mdash; it is a foundation for health, dignity and economic growth.</p>
+        <div class="vision-block">
+          <div class="vision-label">Our Vision</div>
+          <p>&ldquo;A water-resilient Rwanda where communities and businesses can access reliable water throughout the year.&rdquo;</p>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="about-stat-card reveal"><span class="big-num">65K</span><span>m&sup3;/day supply gap identified</span></div>
+        <div class="about-stat-card reveal reveal-d1"><span class="big-num">4</span><span>Step water process</span></div>
+        <div class="about-stat-card reveal reveal-d2"><span class="big-num">100%</span><span>Quality tested water</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="eyebrow">Get In Touch</div>
+    <h2 class="section-title">Contact AquaBank Rwanda</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-row"><span class="cr-icon">&#128205;</span><div><strong>Location</strong><p>Kigali, Rwanda</p></div></div>
+        <div class="contact-row"><span class="cr-icon">&#9993;&#65039;</span><div><strong>Email</strong><p><a href="mailto:info@aquabank.rw">info@aquabank.rw</a></p></div></div>
+        <div class="contact-row"><span class="cr-icon">&#128222;</span><div><strong>Phone</strong><p><a href="tel:+250780000000">+250 780 000 000</a></p></div></div>
+        <div class="social-row">
+          <a href="#" class="social-btn" aria-label="Twitter">&#120143;</a>
+          <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
+          <a href="#" class="social-btn" aria-label="Facebook">f</a>
+          <a href="#" class="social-btn" aria-label="Instagram">&#128247;</a>
+        </div>
+      </div>
+      <form class="card" id="contactForm" novalidate style="padding:32px;">
+        <div class="form-group"><label>Name *</label><input class="form-input" id="cName" placeholder="Your name" required></div>
+        <div class="form-row">
+          <div class="form-group"><label>Email *</label><input class="form-input" type="email" id="cEmail" placeholder="your@email.com" required></div>
+          <div class="form-group"><label>Phone</label><input class="form-input" type="tel" id="cPhone" placeholder="+250 7XX XXX XXX"></div>
+        </div>
+        <div class="form-group"><label>Message *</label><textarea class="form-input" id="cMessage" rows="4" placeholder="How can we help you?" required></textarea></div>
+        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+        <div id="contactSuccess" style="display:none;color:#16a34a;font-weight:600;text-align:center;margin-top:14px;font-size:.9rem;">&#9989; Message sent! We&rsquo;ll be in touch soon.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="color:white;margin-bottom:14px;"><div class="logo-drop">&#128167;</div><span>AquaBank <span class="logo-rw">Rwanda</span></span></div>
+        <p class="footer-tagline">Store Now, Never Run Dry.<br>Kigali&rsquo;s water resilience partner.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#impact">Impact</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Get Water</h4>
+        <a onclick="openModal('orderModal')">Order Water</a>
+        <a onclick="openModal('kioskModal')">Find a Kiosk</a>
+        <a onclick="openModal('trackModal')">Track Delivery</a>
+        <a onclick="openModal('creditsModal')">Water Credits</a>
+        <a onclick="openModal('subModal')">Subscriptions</a>
+        <a onclick="openModal('b2bModal')">B2B Enquiry</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 AquaBank Rwanda. All rights reserved.</p>
+      <p>Kigali, Rwanda &nbsp;&bull;&nbsp; <a href="mailto:info@aquabank.rw">info@aquabank.rw</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>&#128167; AquaBank Rwanda</h2>
+      <button class="modal-close" onclick="closeModal('authModal')">&#10005;</button>
+    </div>
+    <div class="modal-body">
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Log In</button>
+        <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Create Account</button>
+      </div>
+      <div class="auth-panel active" id="panelLogin">
+        <form id="loginForm" novalidate>
+          <div class="form-group"><label>Phone or Email *</label><input class="form-input" id="loginId" placeholder="+250 7XX XXX XXX or email" required></div>
+          <div class="form-group"><label>Password *</label><input class="form-input" type="password" id="loginPwd" placeholder="Your password" required></div>
+          <span class="forgot-link" onclick="switchAuthTab('forgot')">Forgot password?</span>
+          <button type="submit" class="btn btn-primary btn-full">Log In</button>
+          <div class="auth-divider">or</div>
+          <button type="button" class="btn-demo" onclick="demoLogin()">&#127918; Try Demo Account</button>
+        </form>
+      </div>
+      <div class="auth-panel" id="panelRegister">
+        <form id="registerForm" novalidate>
+          <div class="form-row">
+            <div class="form-group"><label>Full Name *</label><input class="form-input" id="regName" placeholder="Your full name" required></div>
+            <div class="form-group"><label>Phone Number *</label><input class="form-input" type="tel" id="regPhone" placeholder="+250 7XX XXX XXX" required></div>
+          </div>
+          <div class="form-group"><label>Email *</label><input class="form-input" type="email" id="regEmail" placeholder="your@email.com" required></div>
+          <div class="form-row">
+            <div class="form-group"><label>Password *</label><input class="form-input" type="password" id="regPwd" placeholder="Create password" required></div>
+            <div class="form-group"><label>Neighbourhood *</label><input class="form-input" id="regLocation" placeholder="e.g. Kimironko" required></div>
+          </div>
+          <div class="form-group"><label>Customer Type *</label>
+            <select class="form-input" id="regType" required>
+              <option value="">Select type...</option>
+              <option>Household</option><option>Restaurant</option><option>Salon</option>
+              <option>Laundromat</option><option>School</option><option>Residential Building</option><option>Other</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+        </form>
+      </div>
+      <div class="auth-panel" id="panelForgot">
+        <p style="color:var(--gray-500);font-size:.9rem;margin-bottom:16px;">Enter your phone or email and we&rsquo;ll send a reset link.</p>
+        <div class="form-group"><label>Phone or Email</label><input class="form-input" id="forgotId" placeholder="+250 7XX XXX XXX or email"></div>
+        <button class="btn btn-primary btn-full" onclick="submitForgot()">Send Reset Link</button>
+        <div style="text-align:center;margin-top:14px;"><span class="forgot-link" onclick="switchAuthTab('login')">&#8592; Back to Login</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER MODAL -->
+<div class="modal-overlay" id="orderModal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <h2>&#128688; Order Water</h2>
+      <button class="modal-close" onclick="closeModal('orderModal')">&#10005;</button>
+    </div>
+    <div class="modal-body">
+      <div class="wizard-bar">
+        <div class="wz-step active" id="ws1"><div class="wz-dot">1</div><span class="wz-label">Quantity</span></div>
+        <div class="wz-line" id="wl1"></div>
+        <div class="wz-step" id="ws2"><div class="wz-dot">2</div><span class="wz-label">Delivery</span></div>
+        <div class="wz-line" id="wl2"></div>
+        <div class="wz-step" id="ws3"><div class="wz-dot">3</div><span class="wz-label">Details</span></div>
+        <div class="wz-line" id="wl3"></div>
+        <div class="wz-step" id="ws4"><div class="wz-dot">4</div><span class="wz-label">Confirm</span></div>
+      </div>
+      <div class="wz-panel active" id="wp1">
+        <p class="wz-title">How much water do you need?</p>
+        <div class="qty-grid">
+          <div class="qty-tile" onclick="selectQty(this,100)"><div class="qty-num">100 L</div><div class="qty-lbl">Small</div></div>
+          <div class="qty-tile" onclick="selectQty(this,250)"><div class="qty-num">250 L</div><div class="qty-lbl">Medium</div></div>
+          <div class="qty-tile" onclick="selectQty(this,500)"><div class="qty-num">500 L</div><div class="qty-lbl">Standard</div></div>
+          <div class="qty-tile" onclick="selectQty(this,1000)"><div class="qty-num">1,000 L</div><div class="qty-lbl">Large</div></div>
+          <div class="qty-tile" onclick="selectQty(this,2000)"><div class="qty-num">2,000 L</div><div class="qty-lbl">Extra Large</div></div>
+          <div class="qty-tile" onclick="selectQty(this,'custom')"><div class="qty-num">Custom</div><div class="qty-lbl">Enter amount</div></div>
+        </div>
+        <div id="customQtyWrap" style="display:none;margin-bottom:16px;">
+          <div class="form-group"><label>Enter quantity (litres)</label><input class="form-input" type="number" id="customLitres" placeholder="e.g. 750" min="50"></div>
+        </div>
+        <div class="wz-nav"><span></span><button class="btn btn-primary" onclick="wizardNext(1)">Next &#8594;</button></div>
+      </div>
+      <div class="wz-panel" id="wp2">
+        <p class="wz-title">How would you like to receive your water?</p>
+        <div class="delivery-list">
+          <div class="delivery-tile" onclick="selectDelivery(this,'Home Delivery')"><span class="dt-icon">&#127968;</span><div><div class="dt-title">Home Delivery</div><div class="dt-desc">We deliver directly to your door</div></div></div>
+          <div class="delivery-tile" onclick="selectDelivery(this,'Business Delivery')"><span class="dt-icon">&#127970;</span><div><div class="dt-title">Business Delivery</div><div class="dt-desc">Delivery to your business premises</div></div></div>
+          <div class="delivery-tile" onclick="selectDelivery(this,'Kiosk Pickup')"><span class="dt-icon">&#128205;</span><div><div class="dt-title">Pick Up at Kiosk</div><div class="dt-desc">Collect from nearest AquaBank kiosk</div></div></div>
+        </div>
+        <div class="wz-nav"><button class="btn btn-ghost" onclick="wizardBack(2)">&#8592; Back</button><button class="btn btn-primary" onclick="wizardNext(2)">Next &#8594;</button></div>
+      </div>
+      <div class="wz-panel" id="wp3">
+        <p class="wz-title">Delivery details</p>
+        <div class="form-group"><label>Delivery Address *</label><input class="form-input" id="orderAddress" placeholder="Street, neighbourhood, landmarks"></div>
+        <div class="form-row">
+          <div class="form-group"><label>Preferred Date *</label><input class="form-input" type="date" id="orderDate"></div>
+          <div class="form-group"><label>Preferred Time</label>
+            <select class="form-input" id="orderTime">
+              <option>Morning (7am &ndash; 12pm)</option>
+              <option>Afternoon (12pm &ndash; 5pm)</option>
+              <option>Evening (5pm &ndash; 8pm)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label>Phone Number *</label><input class="form-input" type="tel" id="orderPhone" placeholder="+250 7XX XXX XXX"></div>
+        <div class="form-group"><label>Additional Instructions</label><textarea class="form-input" id="orderNotes" rows="2" placeholder="Gate code, landmarks, special instructions..."></textarea></div>
+        <div class="wz-nav"><button class="btn btn-ghost" onclick="wizardBack(3)">&#8592; Back</button><button class="btn btn-primary" onclick="wizardNext(3)">Review Order &#8594;</button></div>
+      </div>
+      <div class="wz-panel" id="wp4">
+        <p class="wz-title">Order Summary</p>
+        <div class="order-summary-box" id="orderSummary"></div>
+        <div class="wz-nav"><button class="btn btn-ghost" onclick="wizardBack(4)">&#8592; Back</button><button class="btn btn-primary" onclick="proceedToPayment()">Confirm &amp; Pay &#8594;</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div class="modal-overlay" id="paymentModal">
+  <div class="modal">
+    <div class="modal-header"><h2>&#128179; Payment</h2><button class="modal-close" onclick="closeModal('paymentModal')">&#10005;</button></div>
+    <div class="modal-body">
+      <div id="paymentForm">
+        <p style="color:var(--gray-500);font-size:.9rem;margin-bottom:18px;">Select your payment method to complete your order.</p>
+        <div class="pay-methods">
+          <div class="pay-tile" onclick="selectPayment(this,'momo')"><span class="pt-icon">&#128241;</span><div><div class="pt-title">Mobile Money</div><div class="pt-desc">MTN MoMo / Airtel Money</div></div></div>
+          <div class="pay-tile" onclick="selectPayment(this,'cash')"><span class="pt-icon">&#128181;</span><div><div class="pt-title">Cash on Delivery</div><div class="pt-desc">Pay when water arrives</div></div></div>
+          <div class="pay-tile" onclick="selectPayment(this,'credits')"><span class="pt-icon">&#128167;</span><div><div class="pt-title">Water Credits</div><div class="pt-desc">Use your prepaid balance</div></div></div>
+        </div>
+        <div class="momo-box" id="momoBox" style="display:none;">
+          <label>Mobile Money Phone Number</label>
+          <input class="form-input" type="tel" id="momoPhone" placeholder="07XXXXXXXX" style="margin-top:6px;">
+        </div>
+        <button class="btn btn-primary btn-full" style="margin-top:20px;" onclick="processPayment()">Continue to Payment</button>
+      </div>
+      <div class="pay-success" id="paySuccess" style="display:none;">
+        <span class="ps-icon">&#9989;</span>
+        <h3>Payment Successful!</h3>
+        <p>Your AquaBank order has been confirmed.</p>
+        <div class="ref-box" id="orderRef"></div>
+        <p style="font-size:.82rem;color:var(--gray-400);">You will receive an SMS confirmation shortly.</p>
+        <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="openTrackFromOrder()">Track My Order</button>
+          <button class="btn btn-ghost" onclick="closeModal('paymentModal')">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRACKING MODAL -->
+<div class="modal-overlay" id="trackModal">
+  <div class="modal modal-lg">
+    <div class="modal-header"><h2>&#128666; Track Delivery</h2><button class="modal-close" onclick="closeModal('trackModal')">&#10005;</button></div>
+    <div class="modal-body">
+      <div id="trackSearch">
+        <p style="color:var(--gray-500);font-size:.9rem;margin-bottom:14px;">Enter your order number or phone number to track your delivery.</p>
+        <div style="display:flex;gap:10px;margin-bottom:12px;">
+          <input class="form-input" id="trackInput" placeholder="Order number (e.g. AB-2024-001) or phone" style="flex:1;">
+          <button class="btn btn-primary" onclick="trackOrder()">Track</button>
+        </div>
+        <button class="btn-demo" onclick="trackDemo()">&#128269; View Demo Tracking</button>
+      </div>
+      <div id="trackResult" style="display:none;">
+        <div class="track-header">
+          <div class="track-order-id" id="trackOrderNum">Order #AB-2024-001</div>
+          <div class="track-title" id="trackTitle">500 Litres &mdash; Home Delivery</div>
+          <div class="track-meta"><span id="trackAddr">&#128205; Kimironko, Kigali</span><span id="trackETA">&#9200; ETA: Demo</span></div>
+        </div>
+        <div class="track-timeline" id="trackTimeline"></div>
+        <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="openModal('supportModal')">Contact Support</button>
+          <button class="btn btn-ghost" onclick="resetTrack()">Track Another</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KIOSK MODAL -->
+<div class="modal-overlay" id="kioskModal">
+  <div class="modal modal-lg">
+    <div class="modal-header"><h2>&#128205; Find a Water Kiosk</h2><button class="modal-close" onclick="closeModal('kioskModal')">&#10005;</button></div>
+    <div class="modal-body">
+      <div class="kiosk-search-bar">
+        <input class="form-input" id="kioskSearch" placeholder="Enter your neighbourhood (e.g. Kimironko)" style="flex:1;">
+        <button class="btn btn-primary" onclick="searchKiosks()">Search</button>
+      </div>
+      <div class="map-box">
+        <span class="map-icon">&#128506;&#65039;</span>
+        <p>Interactive map &mdash; connect Maps API to enable live locations</p>
+        <small>Demo kiosks shown below</small>
+      </div>
+      <div class="kiosk-cards" id="kioskList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CREDITS MODAL -->
+<div class="modal-overlay" id="creditsModal">
+  <div class="modal">
+    <div class="modal-header"><h2>&#128167; Water Credits</h2><button class="modal-close" onclick="closeModal('creditsModal')">&#10005;</button></div>
+    <div class="modal-body">
+      <div id="creditsView">
+        <div class="credits-hero">
+          <div class="ch-label">Current Balance</div>
+          <div class="ch-value" id="creditsDisplay">0</div>
+          <div class="ch-unit">Litres</div>
+        </div>
+        <h4 style="font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Add Water Credits</h4>
+        <div class="credit-grid">
+          <div class="credit-tile" onclick="selectCredit(this,100)"><div class="ct-litres">100 L</div><div class="ct-label">Small</div></div>
+          <div class="credit-tile" onclick="selectCredit(this,250)"><div class="ct-litres">250 L</div><div class="ct-label">Medium</div></div>
+          <div class="credit-tile" onclick="selectCredit(this,500)"><div class="ct-litres">500 L</div><div class="ct-label">Standard</div></div>
+          <div class="credit-tile" onclick="selectCredit(this,1000)"><div class="ct-litres">1,000 L</div><div class="ct-label">Large</div></div>
+          <div class="credit-tile" onclick="selectCredit(this,2000)"><div class="ct-litres">2,000 L</div><div class="ct-label">Extra Large</div></div>
+          <div class="credit-tile" onclick="selectCredit(this,'custom')"><div class="ct-litres">Custom</div><div class="ct-label">Enter amount</div></div>
+        </div>
+        <div id="customCreditWrap" style="display:none;margin-bottom:14px;">
+          <input class="form-input" type="number" id="customCreditLitres" placeholder="Enter litres" min="50">
+        </div>
+        <h4 style="font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Payment Method</h4>
+        <div class="pay-methods">
+          <div class="pay-tile" onclick="selectPayment(this,'momo-c')"><span class="pt-icon">&#128241;</span><div><div class="pt-title">Mobile Money</div><div class="pt-desc">MTN MoMo / Airtel Money</div></div></div>
+          <div class="pay-tile" onclick="selectPayment(this,'kiosk-c')"><span class="pt-icon">&#127978;</span><div><div class="pt-title">Cash at Kiosk</div><div class="pt-desc">Pay at any AquaBank kiosk</div></div></div>
+        </div>
+        <button class="btn btn-primary btn-full" style="margin-top:18px;" onclick="purchaseCredits()">Buy Water Credits</button>
+      </div>
+      <div id="creditsSuccess" style="display:none;text-align:center;padding:32px 16px;">
+        <div style="font-size:3.5rem;margin-bottom:14px;">&#128167;</div>
+        <h3 style="color:var(--navy);margin-bottom:8px;">Credits Added!</h3>
+        <p style="color:var(--gray-500);margin-bottom:12px;">Your water credits have been added to your account.</p>
+        <div class="ref-box" id="newBalanceDisplay"></div>
+        <button class="btn btn-primary" style="margin-top:16px;" onclick="closeModal('creditsModal')">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUBSCRIPTION MODAL -->
+<div class="modal-overlay" id="subModal">
+  <div class="modal modal-lg">
+    <div class="modal-header"><h2>&#128197; Water Subscription</h2><button class="modal-close" onclick="closeModal('subModal')">&#10005;</button></div>
+    <div class="modal-body">
+      <p style="color:var(--gray-500);font-size:.9rem;margin-bottom:18px;">Choose a recurring water plan that fits your needs.</p>
+      <div class="sub-grid">
+        <div class="sub-tile" onclick="selectSubPlan(this,'Basic')"><div class="st-icon">&#127968;</div><div class="st-name">Basic</div><div class="st-desc">For small households</div><div class="st-qty">500 L</div><div class="st-freq">per month</div></div>
+        <div class="sub-tile popular" onclick="selectSubPlan(this,'Standard')"><div class="st-icon">&#128106;</div><div class="st-name">Standard</div><div class="st-desc">For medium households</div><div class="st-qty">1,000 L</div><div class="st-freq">per month</div></div>
+        <div class="sub-tile" onclick="selectSubPlan(this,'Business')"><div class="st-icon">&#127970;</div><div class="st-name">Business</div><div class="st-desc">For businesses</div><div class="st-qty">3,000 L</div><div class="st-freq">per month</div></div>
+      </div>
+      <div class="form-row" style="margin-bottom:16px;">
+        <div class="form-group"><label>Delivery Frequency</label><select class="form-input" id="subFreq"><option>Weekly</option><option>Bi-weekly</option><option>Monthly</option></select></div>
+        <div class="form-group"><label>Delivery Location</label><input class="form-input" id="subLocation" placeholder="Your address"></div>
+      </div>
+      <div id="activeSubStatus" style="display:none;">
+        <h4 style="font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:10px;">Your Active Subscription</h4>
+        <div class="sub-status-box">
+          <div class="ss-row"><span>Plan</span><span id="subPlanName">&mdash;</span></div>
+          <div class="ss-row"><span>Status</span><span style="color:var(--green);font-weight:700;">Active</span></div>
+          <div class="ss-row"><span>Next Delivery</span><span id="subNextDelivery">&mdash;</span></div>
+          <div class="ss-row"><span>Water Remaining</span><span id="subRemaining">&mdash;</span></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:12px;">
+          <button class="btn btn-ghost" style="flex:1;border:1.5px solid var(--gray-200);border-radius:100px;" onclick="pauseSub()">Pause</button>
+          <button class="btn btn-ghost" style="flex:1;border:1.5px solid var(--red);color:var(--red);border-radius:100px;" onclick="cancelSub()">Cancel</button>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full" style="margin-top:18px;" id="subActivateBtn" onclick="activateSub()">Activate Subscription</button>
+    </div>
+  </div>
+</div>
+
+<!-- WATER QUALITY MODAL -->
+<div class="modal-overlay" id="qualityModal">
+  <div class="modal">
+    <div class="modal-header"><h2>&#128300; Water Quality</h2><button class="modal-close" onclick="closeModal('qualityModal')">&#10005;</button></div>
+    <div class="modal-body">
+      <div class="quality-cert-card">
+        <span class="qc-badge">&#128167;</span>
+        <h3>AquaBank Quality Certificate</h3>
+        <p>All water is treated, filtered and tested before distribution.</p>
+        <div class="qc-date">Testing Date: <strong>Awaiting Verified Data</strong></div>
+      </div>
+      <div class="quality-rows">
+        <div class="qr-row"><span class="qr-name">pH Level</span><span class="qr-result">Awaiting Verified Test Data</span><span class="qr-status pending">Pending</span></div>
+        <div class="qr-row"><span class="qr-name">Turbidity</span><span class="qr-result">Awaiting Verified Test Data</span><span class="qr-status pending">Pending</span></div>
+        <div class="qr-row"><span class="qr-name">Chlorine</span><span class="qr-result">Awaiting Verified Test Data</span><span class="qr-status pending">Pending</span></div>
+        <div class="qr-row"><span class="qr-name">Treatment Status</span><span class="qr-result">Filtered &amp; Disinfected</span><span class="qr-status ok">&#10003; Done</span></div>
+        <div class="qr-row"><span class="qr-name">Water Source</span><span class="qr-result">Rainwater + Permitted Surplus</span><span class="qr-status ok">&#10003; Verified</span></div>
+      </div>
+      <p style="font-size:.75rem;color:var(--gray-400);margin-top:14px;text-align:center;">Real laboratory results will be published once operations begin. Demo data only.</p>
+    </div>
+  </div>
+</div>
+
+<!-- B2B MODAL -->
+<div class="modal-overlay" id="b2bModal">
+  <div class="modal modal-lg">
+    <div class="modal-header"><h2>&#127970; B2B Water Supply</h2><button class="modal-close" onclick="closeModal('b2bModal')">&#10005;</button></div>
+    <div class="modal-body">
+      <div class="b2b-banner"><h3>Enterprise Water Solutions</h3><p>AquaBank Rwanda provides reliable, high-volume water supply for businesses, schools and institutions across Kigali.</p></div>
+      <form id="b2bForm" novalidate>
+        <div class="form-row">
+          <div class="form-group"><label>Business Name *</label><input class="form-input" id="b2bName" placeholder="Your business name" required></div>
+          <div class="form-group"><label>Business Type *</label><select class="form-input" id="b2bType" required><option value="">Select...</option><option>Restaurant</option><option>Salon</option><option>Laundromat</option><option>School</option><option>Residential Building</option><option>Other</option></select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Contact Person *</label><input class="form-input" id="b2bContact" placeholder="Full name" required></div>
+          <div class="form-group"><label>Phone Number *</label><input class="form-input" type="tel" id="b2bPhone" placeholder="+250 7XX XXX XXX" required></div>
+        </div>
+        <div class="form-group"><label>Location *</label><input class="form-input" id="b2bLocation" placeholder="Business address / neighbourhood" required></div>
+        <div class="form-row">
+          <div class="form-group"><label>Monthly Water Requirement (litres)</label><input class="form-input" type="number" id="b2bVolume" placeholder="e.g. 10000"></div>
+          <div class="form-group"><label>Preferred Delivery Schedule</label><select class="form-input" id="b2bSchedule"><option>Daily</option><option>Weekly</option><option>Bi-weekly</option><option>Monthly</option></select></div>
+        </div>
+        <div class="form-group"><label>Additional Requirements</label><textarea class="form-input" id="b2bNotes" rows="2" placeholder="Any specific requirements or questions..."></textarea></div>
+        <button type="submit" class="btn btn-primary btn-full">Request B2B Contract</button>
+        <div id="b2bSuccess" style="display:none;color:var(--green);font-weight:600;text-align:center;margin-top:14px;font-size:.9rem;">&#9989; Thank you! AquaBank Rwanda will review your request and contact you within 48 hours.</div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- SUPPORT MODAL -->
+<div class="modal-overlay" id="supportModal">
+  <div class="modal">
+    <div class="modal-header"><h2>&#128587; Help &amp; Support</h2><button class="modal-close" onclick="closeModal('supportModal')">&#10005;</button></div>
+    <div class="modal-body">
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
+        <a href="tel:+250780000000" class="pay-tile" style="text-decoration:none;"><span class="pt-icon">&#128222;</span><div><div class="pt-title">Call Support</div><div class="pt-desc">+250 780 000 000</div></div></a>
+        <a href="https://wa.me/250780000000" target="_blank" class="pay-tile" style="text-decoration:none;"><span class="pt-icon">&#128172;</span><div><div class="pt-title">WhatsApp Support</div><div class="pt-desc">Chat with us on WhatsApp</div></div></a>
+        <a href="mailto:info@aquabank.rw" class="pay-tile" style="text-decoration:none;"><span class="pt-icon">&#9993;&#65039;</span><div><div class="pt-title">Email Support</div><div class="pt-desc">info@aquabank.rw</div></div></a>
+      </div>
+      <form id="supportForm" novalidate>
+        <div class="form-group"><label>Issue Type</label><select class="form-input" id="supportType"><option>Order Issue</option><option>Payment Issue</option><option>Delivery Issue</option><option>Water Quality</option><option>Account Issue</option><option>Other</option></select></div>
+        <div class="form-group"><label>Message *</label><textarea class="form-input" id="supportMsg" rows="3" placeholder="Describe your issue..." required></textarea></div>
+        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+        <div id="supportSuccess" style="display:none;color:var(--green);font-weight:600;text-align:center;margin-top:12px;font-size:.9rem;">&#9989; Message received! We&rsquo;ll respond within 2 hours.</div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- FEEDBACK MODAL -->
+<div class="modal-overlay" id="feedbackModal">
+  <div class="modal">
+    <div class="modal-header"><h2>&#11088; Rate Your Experience</h2><button class="modal-close" onclick="closeModal('feedbackModal')">&#10005;</button></div>
+    <div class="modal-body" style="text-align:center;">
+      <p style="color:var(--gray-500);margin-bottom:4px;">How was your AquaBank experience?</p>
+      <div class="star-row" id="starRow">
+        <span class="star" onclick="rateStar(1)">&#11088;</span>
+        <span class="star" onclick="rateStar(2)">&#11088;</span>
+        <span class="star" onclick="rateStar(3)">&#11088;</span>
+        <span class="star" onclick="rateStar(4)">&#11088;</span>
+        <span class="star" onclick="rateStar(5)">&#11088;</span>
+      </div>
+      <div class="form-group" style="text-align:left;margin-top:8px;">
+        <label>What can we improve?</label>
+        <textarea class="form-input" id="feedbackText" rows="3" placeholder="Your feedback helps us serve you better..."></textarea>
+      </div>
+      <button class="btn btn-primary btn-full" onclick="submitFeedback()">Submit Feedback</button>
+      <div id="feedbackSuccess" style="display:none;color:var(--green);font-weight:600;margin-top:12px;font-size:.9rem;">&#9989; Thank you for your feedback!</div>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD MODAL -->
+<div class="modal-overlay" id="dashModal">
+  <div class="modal modal-xl">
+    <div class="modal-header"><h2>&#128202; My Dashboard</h2><button class="modal-close" onclick="closeModal('dashModal')">&#10005;</button></div>
+    <div class="modal-body">
+      <div class="dash-wrap">
+        <div class="dash-sidebar">
+          <div class="dash-user">
+            <div class="dash-avatar" id="dashAvatar">AB</div>
+            <div class="dash-name" id="dashName">Customer</div>
+            <div class="dash-type" id="dashType">Household</div>
+          </div>
+          <nav class="dash-nav">
+            <a class="active" onclick="showDashPanel('overview')"><span class="ni">&#128202;</span> Overview</a>
+            <a onclick="showDashPanel('orders')"><span class="ni">&#128688;</span> My Orders</a>
+            <a onclick="showDashPanel('credits')"><span class="ni">&#128167;</span> Water Credits</a>
+            <a onclick="showDashPanel('subscription')"><span class="ni">&#128197;</span> Subscription</a>
+            <a onclick="showDashPanel('profile')"><span class="ni">&#128100;</span> My Profile</a>
+            <a onclick="openModal('supportModal')"><span class="ni">&#128587;</span> Support</a>
+          </nav>
+        </div>
+        <div class="dash-main">
+          <div class="dash-panel active" id="dp-overview">
+            <div class="dash-panel-title">Welcome back, <span id="dashWelcomeName">Customer</span>!</div>
+            <div class="balance-card">
+              <div class="bc-left"><div class="bc-label">Water Credits Balance</div><div class="bc-value" id="dashBalance">0</div><div class="bc-unit">Litres available</div></div>
+              <div class="bc-actions">
+                <button class="btn-white" onclick="closeModal('dashModal');openModal('creditsModal')">Add Credits</button>
+                <button class="btn-white-outline" onclick="closeModal('dashModal');openModal('orderModal')">Order Water</button>
+              </div>
+            </div>
+            <div class="quick-grid">
+              <button class="qa-tile" onclick="closeModal('dashModal');openModal('orderModal')"><span class="qa-icon">&#128688;</span><span class="qa-label">Order Water</span></button>
+              <button class="qa-tile" onclick="closeModal('dashModal');openModal('trackModal')"><span class="qa-icon">&#128205;</span><span class="qa-label">Track Delivery</span></button>
+              <button class="qa-tile" onclick="closeModal('dashModal');openModal('creditsModal')"><span class="qa-icon">&#128167;</span><span class="qa-label">Buy Credits</span></button>
+              <button class="qa-tile" onclick="closeModal('dashModal');openModal('subModal')"><span class="qa-icon">&#128197;</span><span class="qa-label">Subscription</span></button>
+              <button class="qa-tile" onclick="closeModal('dashModal');openModal('qualityModal')"><span class="qa-icon">&#128300;</span><span class="qa-label">Water Quality</span></button>
+              <button class="qa-tile" onclick="closeModal('dashModal');openModal('feedbackModal')"><span class="qa-icon">&#11088;</span><span class="qa-label">Rate Service</span></button>
+            </div>
+            <h4 style="font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Recent Orders</h4>
+            <div class="table-wrap"><table class="data-table" id="dashOrdersTable"><thead><tr><th>Order</th><th>Date</th><th>Quantity</th><th>Status</th></tr></thead><tbody id="dashOrdersBody"></tbody></table></div>
+          </div>
+          <div class="dash-panel" id="dp-orders">
+            <div class="dash-panel-title">My Orders</div>
+            <div class="table-wrap"><table class="data-table"><thead><tr><th>Order</th><th>Date</th><th>Quantity</th><th>Delivery Type</th><th>Status</th><th>Action</th></tr></thead><tbody id="allOrdersBody"></tbody></table></div>
+          </div>
+          <div class="dash-panel" id="dp-credits">
+            <div class="dash-panel-title">Water Credits</div>
+            <div class="credits-hero" style="margin-bottom:20px;"><div class="ch-label">Current Balance</div><div class="ch-value" id="dashCreditsVal">0</div><div class="ch-unit">Litres</div></div>
+            <button class="btn btn-primary" onclick="closeModal('dashModal');openModal('creditsModal')">Add Water Credits</button>
+          </div>
+          <div class="dash-panel" id="dp-subscription">
+            <div class="dash-panel-title">My Subscription</div>
+            <div id="dashSubContent"><p style="color:var(--gray-500);">No active subscription. <span style="color:var(--blue);cursor:pointer;font-weight:600;" onclick="closeModal('dashModal');openModal('subModal')">Activate a plan</span></p></div>
+          </div>
+          <div class="dash-panel" id="dp-profile">
+            <div class="dash-panel-title">My Profile</div>
+            <div class="card" style="max-width:480px;">
+              <div class="form-group"><label>Full Name</label><input class="form-input" id="profileName" placeholder="Your name"></div>
+              <div class="form-group"><label>Phone</label><input class="form-input" id="profilePhone" placeholder="+250 7XX XXX XXX"></div>
+              <div class="form-group"><label>Email</label><input class="form-input" id="profileEmail" placeholder="your@email.com"></div>
+              <div class="form-group"><label>Neighbourhood</label><input class="form-input" id="profileLocation" placeholder="e.g. Kimironko"></div>
+              <button class="btn btn-primary" onclick="saveProfile()">Save Changes</button>
+              <div id="profileSuccess" style="display:none;color:var(--green);font-weight:600;margin-top:10px;font-size:.9rem;">&#9989; Profile updated!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHATBOT -->
+<button class="chat-fab" id="chatFab" onclick="toggleChat()" aria-label="Open support chat">&#128172;</button>
+<div class="chat-window" id="chatWindow">
+  <div class="chat-head">
+    <div class="chat-avatar">&#128167;</div>
+    <div><div class="chat-head-name">AquaBank Assistant</div><div class="chat-head-status">&#128994; Online &mdash; typically replies instantly</div></div>
+    <button class="chat-x" onclick="toggleChat()">&#10005;</button>
+  </div>
+  <div class="chat-msgs" id="chatMsgs"></div>
+  <div class="chat-chips" id="chatChips"></div>
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="chat-send" onclick="sendChat()">&#10148;</button>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

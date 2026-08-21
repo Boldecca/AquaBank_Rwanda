@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impact | AquaBank Rwanda</title>
+  <meta name="description" content="See the AquaBank Rwanda impact model, including pilot water targets, customer reach and support for resilient Kigali communities." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo"><div class="logo-drop">💧</div><span>AquaBank <span class="logo-rw">Rwanda</span></span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="solutions.html">Solutions</a></li>
+        <li><a href="business.html">Business</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="impact.html" class="active">Impact</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="notif-btn" id="notifBtn" style="display:none" onclick="toggleNotif()">🔔<span class="notif-badge" id="notifCount">3</span></button>
+        <div class="user-menu" id="userMenuWrap" style="display:none"><div class="user-avatar" id="userAvatar" onclick="toggleUserMenu()">AB</div><div class="user-dropdown" id="userDropdown"><div class="user-dropdown-header"><div class="uname" id="ddName">Customer</div><div class="uemail" id="ddEmail">&mdash;</div></div><a onclick="openDashboard()">📊 My Dashboard</a><a onclick="openModal('orderModal')">🚚 Order Water</a><a onclick="openModal('trackModal')">📍 Track Delivery</a><a onclick="openModal('creditsModal')">💧 Water Credits</a><a onclick="openModal('subModal')">📅 Subscription</a><button class="logout-btn" onclick="logout()">🚫 Log Out</button></div></div>
+        <div id="guestBtns"><button class="btn-ghost" onclick="openModal('authModal')">Log In</button><button class="btn btn-primary btn-sm" onclick="openAuthTab('register')">Sign Up Free</button></div>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="notif-dropdown" id="notifDropdown"><div class="notif-header"><h4>Notifications</h4><button class="notif-clear" onclick="clearNotifs()">Mark all read</button></div><div class="notif-list" id="notifList"></div></div>
+
+  <main>
+    <section class="page-hero page-hero-soft">
+      <div class="container page-hero-grid">
+        <div class="page-hero-copy reveal">
+          <span class="eyebrow">Impact</span>
+          <h1>Measured outcomes for a more resilient Kigali.</h1>
+          <p>Our impact model focuses on the value of stored water, reliable delivery, and practical support for households, small businesses and institutions.</p>
+          <div class="hero-links"><button class="btn btn-primary" onclick="openModal('orderModal')">Get Water</button><button class="btn btn-outline-white" onclick="openModal('b2bModal')">Partner With Us</button></div>
+        </div>
+        <div class="hero-visual reveal reveal-d1"><div class="water-scene"><div class="scene-cloud">☁️</div><div class="scene-tank"><span class="tank-label">Impact</span></div><div class="scene-wave wave-one"></div><div class="scene-wave wave-two"></div><div class="scene-wave wave-three"></div></div></div>
+      </div>
+    </section>
+
+    <section class="section bg-light">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-box reveal"><strong>50,000 L+</strong><span>Water captured monthly in pilot planning</span></div>
+          <div class="stat-box reveal reveal-d1"><strong>42,000 L</strong><span>Water distributed through pilot service</span></div>
+          <div class="stat-box reveal reveal-d2"><strong>1,200</strong><span>Customers served during expansion planning</span></div>
+          <div class="stat-box reveal reveal-d3"><strong>85%</strong><span>Customer retention target for recurring service</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split-grid">
+        <div class="story-panel reveal">
+          <span class="eyebrow">What we measure</span>
+          <h2 class="section-title">Impact is about reliability and daily access.</h2>
+          <p>We track what matters most to customers and operators: the volume of water captured, how much is distributed, how many customers are served, and how consistent the service remains over time.</p>
+        </div>
+        <div class="story-panel reveal reveal-d1">
+          <ul class="check-list">
+            <li>Water capture and storage efficiency</li>
+            <li>Customer reach across household and business segments</li>
+            <li>Distribution reliability and route performance</li>
+            <li>Service continuity during seasonal pressure periods</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><div class="nav-logo" style="color:white;margin-bottom:14px;"><div class="logo-drop">💧</div><span>AquaBank <span class="logo-rw">Rwanda</span></span></div><p class="footer-tagline">Store now, never run dry.<br>Kigali’s water resilience partner.</p></div>
+        <div class="footer-col"><h4>Navigation</h4><a href="index.html">Home</a><a href="about.html">About</a><a href="how-it-works.html">How It Works</a><a href="solutions.html">Solutions</a><a href="impact.html">Impact</a><a href="contact.html">Contact</a></div>
+        <div class="footer-col"><h4>Customer portal</h4><a onclick="openModal('orderModal')">Order Water</a><a onclick="openModal('trackModal')">Track Delivery</a><a onclick="openModal('creditsModal')">Water Credits</a><a onclick="openModal('subModal')">Subscriptions</a><a href="faq.html">FAQ</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2026 AquaBank Rwanda. All rights reserved.</p><p>Kigali, Rwanda • <a href="mailto:info@aquabank.rw">info@aquabank.rw</a></p></div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

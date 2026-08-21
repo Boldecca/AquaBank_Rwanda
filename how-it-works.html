@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How It Works | AquaBank Rwanda</title>
+  <meta name="description" content="Learn how AquaBank Rwanda captures, stores, treats and delivers water to communities and businesses across Kigali." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/app.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-drop">💧</div>
+        <span>AquaBank <span class="logo-rw">Rwanda</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="how-it-works.html" class="active">How It Works</a></li>
+        <li><a href="solutions.html">Solutions</a></li>
+        <li><a href="business.html">Business</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="impact.html">Impact</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="notif-btn" id="notifBtn" style="display:none" onclick="toggleNotif()">🔔<span class="notif-badge" id="notifCount">3</span></button>
+        <div class="user-menu" id="userMenuWrap" style="display:none"><div class="user-avatar" id="userAvatar" onclick="toggleUserMenu()">AB</div><div class="user-dropdown" id="userDropdown"><div class="user-dropdown-header"><div class="uname" id="ddName">Customer</div><div class="uemail" id="ddEmail">&mdash;</div></div><a onclick="openDashboard()">📊 My Dashboard</a><a onclick="openModal('orderModal')">🚚 Order Water</a><a onclick="openModal('trackModal')">📍 Track Delivery</a><a onclick="openModal('creditsModal')">💧 Water Credits</a><a onclick="openModal('subModal')">📅 Subscription</a><button class="logout-btn" onclick="logout()">🚫 Log Out</button></div></div>
+        <div id="guestBtns"><button class="btn-ghost" onclick="openModal('authModal')">Log In</button><button class="btn btn-primary btn-sm" onclick="openAuthTab('register')">Sign Up Free</button></div>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="notif-dropdown" id="notifDropdown"><div class="notif-header"><h4>Notifications</h4><button class="notif-clear" onclick="clearNotifs()">Mark all read</button></div><div class="notif-list" id="notifList"></div></div>
+
+  <main>
+    <section class="page-hero page-hero-soft">
+      <div class="container page-hero-grid">
+        <div class="page-hero-copy reveal">
+          <span class="eyebrow">How it works</span>
+          <h1>From wet-season capture to reliable daily supply.</h1>
+          <p>AquaBank Rwanda follows a simple flow: capture rainfall and surplus water, store it safely, treat it, test it, and deliver it where it is needed most.</p>
+          <div class="hero-links"><button class="btn btn-primary" onclick="openModal('orderModal')">Get Water</button><button class="btn btn-outline-white" onclick="openModal('trackModal')">Track Delivery</button></div>
+        </div>
+        <div class="hero-visual reveal reveal-d1">
+          <div class="water-scene">
+            <div class="scene-cloud">☁️</div>
+            <div class="scene-tank"><span class="tank-label">Water Bank</span></div>
+            <div class="scene-wave wave-one"></div>
+            <div class="scene-wave wave-two"></div>
+            <div class="scene-wave wave-three"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-light">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Flow</span>
+          <h2 class="section-title">The AquaBank system</h2>
+        </div>
+        <div class="process-steps reveal">
+          <div class="step-card"><span class="step-number">1</span><div class="step-icon">🌧️</div><h3>Capture</h3><p>Rainwater and surplus water are collected from rooftops, channels and approved intake points.</p></div>
+          <div class="step-card"><span class="step-number">2</span><div class="step-icon">🛢️</div><h3>Store</h3><p>Water is moved into sealed storage tanks that help buffer seasonal demand.</p></div>
+          <div class="step-card"><span class="step-number">3</span><div class="step-icon">🧪</div><h3>Filter</h3><p>Pre-treatment supports the removal of solids and improves water quality before distribution.</p></div>
+          <div class="step-card"><span class="step-number">4</span><div class="step-icon">🧴</div><h3>Disinfect</h3><p>Disinfection and monitoring help reduce risk and support safer drinking water.</p></div>
+          <div class="step-card"><span class="step-number">5</span><div class="step-icon">✅</div><h3>Test</h3><p>Routine quality checks cover pH, turbidity and chlorine-related monitoring requirements.</p></div>
+          <div class="step-card"><span class="step-number">6</span><div class="step-icon">🚚</div><h3>Distribute</h3><p>Water reaches homes, businesses and institutions through kiosks, scheduled delivery and smart metering.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Customer flow</span>
+          <h2 class="section-title">How customers get water</h2>
+        </div>
+        <div class="method-grid feature-grid">
+          <article class="feature-card reveal">
+            <div class="card-icon icon-blue">📱</div>
+            <h3>Prepaid kiosk</h3>
+            <p>Customers top up water credits and collect water at a trusted local kiosk.</p>
+          </article>
+          <article class="feature-card reveal reveal-d1">
+            <div class="card-icon icon-teal">🚐</div>
+            <h3>Scheduled delivery</h3>
+            <p>Orders are planned to suit households, salons, restaurants and service businesses.</p>
+          </article>
+          <article class="feature-card reveal reveal-d2">
+            <div class="card-icon icon-green">📡</div>
+            <h3>Smart-metered connection</h3>
+            <p>Usage is tracked and managed for more structured, dependable service.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-dark">
+      <div class="container split-grid">
+        <div class="story-panel reveal">
+          <span class="eyebrow light">Operational model</span>
+          <h2 class="section-title light">Simple service, strong quality control.</h2>
+          <p class="light-copy">From collection and storage to testing and delivery, each stage is designed to keep the product safe, traceable and easy for customers to use.</p>
+        </div>
+        <div class="story-panel reveal reveal-d1">
+          <ul class="check-list check-list-light">
+            <li>Monitoring of storage conditions and tank levels</li>
+            <li>Routine quality checks for visible and measurable water quality indicators</li>
+            <li>Clear route planning for scheduled delivery and pickup</li>
+            <li>Customer support and account tracking for repeat buyers</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><div class="nav-logo" style="color:white;margin-bottom:14px;"><div class="logo-drop">💧</div><span>AquaBank <span class="logo-rw">Rwanda</span></span></div><p class="footer-tagline">Store now, never run dry.<br>Kigali’s water resilience partner.</p></div>
+        <div class="footer-col"><h4>Navigation</h4><a href="index.html">Home</a><a href="about.html">About</a><a href="how-it-works.html">How It Works</a><a href="solutions.html">Solutions</a><a href="impact.html">Impact</a><a href="contact.html">Contact</a></div>
+        <div class="footer-col"><h4>Customer portal</h4><a onclick="openModal('orderModal')">Order Water</a><a onclick="openModal('trackModal')">Track Delivery</a><a onclick="openModal('creditsModal')">Water Credits</a><a onclick="openModal('subModal')">Subscriptions</a><a href="faq.html">FAQ</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2026 AquaBank Rwanda. All rights reserved.</p><p>Kigali, Rwanda • <a href="mailto:info@aquabank.rw">info@aquabank.rw</a></p></div>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="authModal">...</div>
+  <div class="modal-overlay" id="orderModal">...</div>
+  <div class="modal-overlay" id="paymentModal">...</div>
+  <div class="modal-overlay" id="trackModal">...</div>
+  <div class="modal-overlay" id="creditsModal">...</div>
+  <div class="modal-overlay" id="subModal">...</div>
+  <div class="modal-overlay" id="b2bModal">...</div>
+  <div class="modal-overlay" id="supportModal">...</div>
+  <div class="modal-overlay" id="dashModal">...</div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
