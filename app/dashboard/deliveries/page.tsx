@@ -1,7 +1,14 @@
+"use client"
+import { useEffect, useState } from 'react'
 import DashboardShell from '../../../../components/DashboardShell'
+import { MockService } from '../../../../components/MockService'
 
 export default function DeliveriesPage(){
-  const next = JSON.parse(localStorage.getItem('demoNextDelivery')||'null')
+  const [next, setNext] = useState<any | null>(null)
+
+  useEffect(()=>{
+    setNext(MockService.getNextDelivery())
+  },[])
 
   return (
     <DashboardShell>

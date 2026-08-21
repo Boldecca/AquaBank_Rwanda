@@ -1,18 +1,12 @@
 'use client'
 import { useState, useEffect } from 'react'
-
-const sample = [
-  {id:'T-01', name:'Remera Tank A', location:'Remera', capacity:200000, level:150000, temp:22.3, updated:'2026-08-20 09:12', status:'Normal'},
-  {id:'T-02', name:'Kicukiro Tank', location:'Kicukiro', capacity:150000, level:20000, temp:24.1, updated:'2026-08-20 08:50', status:'Low'},
-  {id:'T-03', name:'Gacuriro Reservoir', location:'Gacuriro', capacity:250000, level:2000, temp:23.0, updated:'2026-08-19 18:00', status:'Critical'}
-]
+import { MockService, Tank } from './MockService'
 
 export default function TanksTable(){
-  const [tanks,setTanks] = useState(sample)
+  const [tanks,setTanks] = useState<Tank[]>([])
 
   useEffect(()=>{
-    const stored = localStorage.getItem('demoTanks')
-    if(stored) setTanks(JSON.parse(stored))
+    setTanks(MockService.getTanks())
   },[])
 
   return (

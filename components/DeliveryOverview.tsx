@@ -1,12 +1,13 @@
-'use client'
+"use client"
 import { useState, useEffect } from 'react'
+import { MockService } from './MockService'
 
 export default function DeliveryOverview(){
   const [nextDelivery, setNextDelivery] = useState<{address:string;slot:string;driver:string}|null>({address:'Kigali, Remera', slot:'2026-08-20 09:00-11:00', driver:'Not assigned'})
 
   useEffect(()=>{
-    const d = localStorage.getItem('demoNextDelivery')
-    if(d) setNextDelivery(JSON.parse(d))
+    const d = MockService.getNextDelivery()
+    if(d) setNextDelivery(d)
   },[])
 
   if(!nextDelivery) return null

@@ -17,7 +17,7 @@ export default function RegisterPage(){
       router.push('/dashboard')
     }catch(e){
       // fallback to demo mode
-      localStorage.setItem('demoUser', JSON.stringify({email}))
+      try{ const { MockService } = await import('../../components/MockService'); MockService.saveUser({email}) }catch(err){ localStorage.setItem('demoUser', JSON.stringify({email})) }
       router.push('/dashboard')
     }
   }

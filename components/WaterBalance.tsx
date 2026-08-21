@@ -1,12 +1,12 @@
-'use client'
+"use client"
 import { useEffect, useState } from 'react'
+import { MockService } from './MockService'
 
 export default function WaterBalance(){
   const [data,setData] = useState({credit: 1200, purchased: 1500, used: 300})
 
   useEffect(()=>{
-    const stored = localStorage.getItem('demoBalance')
-    if(stored) setData(JSON.parse(stored))
+    setData(MockService.getBalance())
   },[])
 
   const remaining = data.purchased - data.used

@@ -5,29 +5,37 @@ import { useState } from 'react'
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   return (
-    <nav className="bg-aquanavy text-white">
+    <header className="site-header">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3 text-lg font-semibold">
-          <div className="rounded-full bg-white/10 p-2">💧</div>
-          <span>AquaBank <span className="text-sm text-slate-200">Rwanda</span></span>
+        <Link href="/" className="brand" aria-label="AquaBank Rwanda home">
+          <div className="logo" aria-hidden>💧</div>
+          <div className="title"><span className="block">AquaBank</span><small className="text-sm text-slate-200">Rwanda</small></div>
         </Link>
-        <div className="hidden md:flex items-center gap-4">
-          <Link href="/" className="hover:underline">Home</Link>
-          <Link href="/order" className="hover:underline">Order</Link>
-          <Link href="/dashboard" className="hover:underline">Dashboard</Link>
-          <Link href="/monitoring" className="hover:underline">Monitoring</Link>
-        </div>
-        <div className="md:hidden">
-          <button onClick={() => setOpen(!open)} aria-label="menu">☰</button>
+
+        <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation">
+          <Link href="/" className="text-slate-100 hover:text-white">Home</Link>
+          <Link href="/order" className="text-slate-100 hover:text-white">Order</Link>
+          <Link href="/dashboard" className="text-slate-100 hover:text-white">Dashboard</Link>
+          <Link href="/monitoring" className="text-slate-100 hover:text-white">Monitoring</Link>
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <div className="hidden md:block">
+            <Link href="/login" className="btn btn-secondary">Sign in</Link>
+          </div>
+          <button className="md:hidden p-2 rounded focus:ring" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)} aria-label="Toggle menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12h18M3 6h18M3 18h18" /></svg>
+          </button>
         </div>
       </div>
+
       {open && (
-        <div className="md:hidden bg-aquanavy/95 px-6 py-4">
+        <div id="mobile-menu" className="md:hidden bg-white/5 backdrop-blur-sm px-6 py-4">
           <Link href="/order" className="block py-2">Order</Link>
           <Link href="/dashboard" className="block py-2">Dashboard</Link>
           <Link href="/monitoring" className="block py-2">Monitoring</Link>
         </div>
       )}
-    </nav>
+    </header>
   )
 }

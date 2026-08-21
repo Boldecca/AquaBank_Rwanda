@@ -1,12 +1,12 @@
-'use client'
+"use client"
 import { useState, useEffect } from 'react'
+import { MockService } from './MockService'
 
 export default function WaterQuality(){
   const [q, setQ] = useState({when:'2026-08-12', status: 'Pass', turbidity: '0.5 NTU', pH: '7.2', chlorine: '0.2 mg/L'})
 
   useEffect(()=>{
-    const stored = localStorage.getItem('demoQuality')
-    if(stored) setQ(JSON.parse(stored))
+    setQ(MockService.getQuality())
   },[])
 
   return (

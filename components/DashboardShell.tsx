@@ -1,14 +1,16 @@
 'use client'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import { MockService } from './MockService'
+import type { ReactNode } from 'react'
 
-export default function DashboardShell({children}:{children:React.ReactNode}){
+export default function DashboardShell({children}:{children:ReactNode}){
   const [open,setOpen] = useState(false)
   const [user,setUser] = useState<{email?:string}|null>(null)
 
   useEffect(()=>{
-    const d = localStorage.getItem('demoUser')
-    if(d) setUser(JSON.parse(d))
+    const d = MockService.getUser()
+    if(d) setUser(d)
   },[])
 
   return (

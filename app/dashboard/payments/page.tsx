@@ -1,7 +1,15 @@
+"use client"
+import { useEffect, useState } from 'react'
 import DashboardShell from '../../../../components/DashboardShell'
+import { MockService } from '../../../../components/MockService'
 
 export default function PaymentsPage(){
-  const payments = JSON.parse(localStorage.getItem('demoPayments')||'[]')
+  const [payments, setPayments] = useState<any[]>([])
+
+  useEffect(()=>{
+    setPayments(MockService.getPayments())
+  },[])
+
   return (
     <DashboardShell>
       <div>

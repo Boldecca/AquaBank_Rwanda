@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts'
 import { analyzeDemand } from './AIEngine'
+import { MockService } from './MockService'
 
 export default function AIDemand({ordersProp}:{ordersProp?: any[]}){
   const [orders, setOrders] = useState<any[]>(ordersProp || [])
@@ -9,8 +10,8 @@ export default function AIDemand({ordersProp}:{ordersProp?: any[]}){
 
   useEffect(()=>{
     try{
-      const stored = localStorage.getItem('demoOrders')
-      if(stored) setOrders(JSON.parse(stored))
+      const stored = MockService.getOrders()
+      if(stored) setOrders(stored)
     }catch(e){}
   },[])
 

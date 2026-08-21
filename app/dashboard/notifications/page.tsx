@@ -1,7 +1,15 @@
+"use client"
+import { useEffect, useState } from 'react'
 import DashboardShell from '../../../../components/DashboardShell'
+import { MockService } from '../../../../components/MockService'
 
 export default function NotificationsPage(){
-  const notes = JSON.parse(localStorage.getItem('demoNotifs')||'[]')
+  const [notes,setNotes] = useState<any[]>([])
+
+  useEffect(()=>{
+    setNotes(MockService.getNotifs())
+  },[])
+
   return (
     <DashboardShell>
       <div>

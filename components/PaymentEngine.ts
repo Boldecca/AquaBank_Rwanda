@@ -14,6 +14,8 @@ function uid(prefix = ''){
   return prefix + Math.random().toString(36).slice(2,9).toUpperCase()
 }
 
+import { MockService } from './MockService'
+
 export async function processPayment(method: string, amount:number, details:any = {}) : Promise<PaymentRecord>{
   // simulated delay
   await new Promise(r=>setTimeout(r, 700))
@@ -33,10 +35,7 @@ export async function processPayment(method: string, amount:number, details:any 
   }
 
   try{
-    const raw = localStorage.getItem('demoPayments')
-    const all = raw ? JSON.parse(raw) : []
-    all.unshift(rec)
-    localStorage.setItem('demoPayments', JSON.stringify(all))
+    MockService.addPayment(rec)
   }catch(e){
     console.warn('failed to persist demo payment', e)
   }
@@ -46,8 +45,7 @@ export async function processPayment(method: string, amount:number, details:any 
 
 export function getPayments(){
   try{
-    const raw = localStorage.getItem('demoPayments')
-    return raw ? JSON.parse(raw) : []
+    return MockService.getPayments()
   }catch(e){
     return []
   }

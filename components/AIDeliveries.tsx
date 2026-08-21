@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { optimizeDeliveries } from './AIEngine'
+import { MockService } from './MockService'
 
 export default function AIDeliveries(){
   const [deliveries,setDeliveries] = useState<any[]>([])
@@ -8,13 +9,7 @@ export default function AIDeliveries(){
   const [plan,setPlan] = useState<any>(null)
 
   useEffect(()=>{
-    const stored = localStorage.getItem('demoDeliveries')
-    const sample = stored ? JSON.parse(stored) : [
-      {id:'DEL-2001', qty:500, address:'Remera', status:'Scheduled'},
-      {id:'DEL-2002', qty:1000, address:'Kicukiro', status:'Delivered'},
-      {id:'DEL-2003', qty:800, address:'Gacuriro', status:'Scheduled'},
-      {id:'DEL-2004', qty:1200, address:'Kigali Central', status:'Scheduled'}
-    ]
+    const sample = MockService.getDeliveries()
     setDeliveries(sample)
   },[])
 

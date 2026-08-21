@@ -1,18 +1,14 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { predictDepletion } from './AIEngine'
+import { MockService } from './MockService'
 
 export default function AITanks({avgDaily}:{avgDaily?:number}){
   const [tanks,setTanks] = useState<any[]>([])
   const [preds,setPreds] = useState<any[]>([])
 
   useEffect(()=>{
-    const stored = localStorage.getItem('demoTanks')
-    const sample = stored ? JSON.parse(stored) : [
-      {id:'T-01', name:'Remera Tank A', capacity:200000, level:150000},
-      {id:'T-02', name:'Kicukiro Tank', capacity:150000, level:20000},
-      {id:'T-03', name:'Gacuriro Reservoir', capacity:250000, level:2000}
-    ]
+    const sample = MockService.getTanks()
     setTanks(sample)
   },[])
 

@@ -1,17 +1,12 @@
-'use client'
+ 'use client'
 import { useState, useEffect } from 'react'
-
-const sample = [
-  {id:'DEL-2001', customer:'Alice', address:'Remera', qty:500, driver:'Jean', slot:'2026-08-20 09:00-11:00', status:'Scheduled'},
-  {id:'DEL-2002', customer:'Bob', address:'Kicukiro', qty:1000, driver:'Paul', slot:'2026-08-19 14:00-16:00', status:'Delivered'}
-]
+import { MockService, Delivery } from './MockService'
 
 export default function DeliveriesAdmin(){
-  const [dels,setDels] = useState(sample)
+  const [dels,setDels] = useState<Delivery[]>([])
 
   useEffect(()=>{
-    const stored = localStorage.getItem('demoDeliveries')
-    if(stored) setDels(JSON.parse(stored))
+    setDels(MockService.getDeliveries())
   },[])
 
   return (

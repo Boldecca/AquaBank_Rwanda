@@ -1,12 +1,14 @@
+"use client"
 import DashboardShell from '../../../../components/DashboardShell'
 import { useState, useEffect } from 'react'
+import { MockService } from '../../../../components/MockService'
 
 export default function ProfilePage(){
   const [profile,setProfile] = useState({name:'Demo User', email: ''})
 
   useEffect(()=>{
-    const d = localStorage.getItem('demoUser')
-    if(d) setProfile((p)=> ({...p, email: JSON.parse(d).email}))
+    const d = MockService.getUser()
+    if(d) setProfile((p)=> ({...p, email: d.email}))
   },[])
 
   return (

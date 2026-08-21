@@ -3,43 +3,93 @@
 @tailwind utilities;
 
 :root{
-  --bg:#061029;
+  --color-navy: #061029;
+  --color-deep-navy: #071021;
+  --color-aqua: #06b6d4;
+  --color-teal: #0ea5a4;
+  --color-muted: #6b7280;
+  --surface: #ffffff;
+  --bg: #f8fafc;
+  --glass: rgba(255,255,255,0.6);
+  --focus: 3px rgba(14,165,164,0.16);
+  --brand-contrast: #e6f7f6;
 }
 
-body{
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+/* Typography */
+@layer base {
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body{
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    background: var(--bg);
+    color: #0f172a;
+    line-height: 1.5;
+  }
+
+  h1 { @apply text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight }
+  h2 { @apply text-2xl md:text-3xl font-bold text-slate-900 }
+  h3 { @apply text-lg font-semibold text-slate-800 }
+  p, label, li { @apply text-sm text-slate-700 }
+  small { @apply text-xs text-slate-500 }
 }
 
-.btn{ @apply inline-flex items-center justify-center rounded-md px-4 py-2 bg-white text-aquanavy border border-white/10; }
-.btn-primary{ @apply bg-aquablue text-white hover:opacity-95 }
-.btn-outline{ @apply bg-transparent border border-white/20 text-white }
-.btn-ghost{ @apply bg-transparent text-white/80 }
+/* Buttons */
+.btn{ @apply inline-flex items-center justify-center rounded-md px-4 py-2 border transition-shadow duration-150 ease-in-out shadow-sm }
+.btn-primary{ background: linear-gradient(180deg,var(--color-teal),var(--color-aqua)); color: white; border: none; }
+.btn-secondary{ @apply bg-white text-slate-900 border border-slate-200 }
+.btn-ghost{ @apply bg-transparent text-slate-700 }
+.btn[disabled]{ @apply opacity-60 cursor-not-allowed }
 
-.card{ @apply bg-white rounded-lg p-6 shadow-sm }
-.input{ @apply w-full border border-slate-200 rounded-md px-3 py-2 }
+.btn:focus{ outline: none; box-shadow: var(--focus); }
 
-/* Simple responsive adjustments */
+/* Cards */
+.card{ background: var(--surface); border-radius: 12px; padding: 1rem; box-shadow: 0 6px 18px rgba(2,6,23,0.06); transition: transform .18s ease, box-shadow .18s ease }
+.card:hover{ transform: translateY(-4px); box-shadow: 0 14px 30px rgba(2,6,23,0.08) }
+
+/* Forms */
+.input{ @apply w-full border border-slate-200 rounded-md px-3 py-2 bg-white }
+.input:focus{ outline:none; box-shadow: var(--focus); }
+label{ @apply block text-sm font-medium text-slate-700 mb-1 }
+
+/* Tables */
+.table { width:100%; border-collapse: collapse }
+.table th{ @apply text-sm text-slate-500 font-medium text-left py-2 }
+.table td{ @apply py-3 text-sm text-slate-700 border-t }
+
+/* Sidebar and Nav */
+.site-header{ background: linear-gradient(180deg, var(--color-navy), var(--color-deep-navy)); color: white }
+.brand { @apply flex items-center gap-3 font-semibold text-lg }
+.brand .logo { @apply rounded-full bg-white/10 p-2 }
+
+.sidebar { background: var(--surface); border-radius: 12px; padding: 0.75rem; box-shadow: 0 8px 20px rgba(2,6,23,0.04) }
+.sidebar a{ display:block; padding:0.5rem 0.75rem; border-radius:8px; color: #0f172a; transition: background .12s }
+.sidebar a:hover, .sidebar a:focus{ background: rgba(14,165,164,0.06); color: var(--color-teal); outline:none }
+
+/* Modals */
+.modal-backdrop{ background: rgba(2,6,23,0.45); position: fixed; inset:0; display:flex; align-items:center; justify-content:center }
+.modal { @apply bg-white rounded-lg p-6 max-w-2xl w-full }
+
+/* Toasts / alerts */
+.toast{ background: white; padding: .6rem .8rem; border-radius: 8px; box-shadow: 0 8px 20px rgba(2,6,23,0.06) }
+.alert{ @apply p-3 rounded-md }
+.alert-info{ background: linear-gradient(90deg,var(--brand-contrast), white); border-left: 4px solid var(--color-aqua) }
+.alert-warning{ background: #fff7ed; border-left:4px solid #f59e0b }
+.alert-error{ background:#fff1f2; border-left:4px solid #ef4444 }
+
+/* Ripple / water accent (subtle) */
+.ripple{ width:220px; height:220px; border-radius:9999px; background: radial-gradient(circle at 30% 30%, rgba(6,182,212,0.08), transparent 20%), radial-gradient(circle at 70% 70%, rgba(14,165,164,0.06), transparent 40%); animation: ripple 6s linear infinite }
+@keyframes ripple{ 0%{ transform: scale(1); opacity: 1 } 50%{ transform: scale(1.04); opacity:.9 } 100%{ transform: scale(1); opacity:1 } }
+
+/* Loading */
+.spinner{ width:28px; height:28px; border-radius:50%; border:3px solid rgba(15,23,42,0.12); border-top-color:var(--color-aqua); animation: spin 1s linear infinite }
+@keyframes spin{ to{ transform: rotate(360deg) } }
+
+/* Responsive helpers */
 @media (max-width: 768px){
-  .btn{ @apply w-full }
+  .brand .title{ display:none }
 }
 
-/* Ripple animation for hero */
-.ripple{
-  width: 220px;
-  height: 220px;
-  margin: 0 auto;
-  border-radius: 9999px;
-  background: radial-gradient(circle at 30% 30%, rgba(14,165,164,0.18), transparent 20%), radial-gradient(circle at 70% 70%, rgba(6,182,212,0.08), transparent 40%);
-  box-shadow: 0 10px 30px rgba(2,6,23,0.4) inset;
-  animation: ripple 6s linear infinite;
-}
+/* Accessibility */
+:focus{ outline: none }
+a:focus{ box-shadow: var(--focus) }
 
-@keyframes ripple{
-  0%{ transform: scale(1); opacity: 1 }
-  50%{ transform: scale(1.06); opacity: 0.85 }
-  100%{ transform: scale(1); opacity: 1 }
-}
-
-/* Section headings */
-h2{ @apply text-slate-900 }
 

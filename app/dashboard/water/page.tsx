@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { MockService } from '../../../components/MockService'
 
 export default function DashboardWater(){
   const [qty,setQty] = useState(500)
@@ -56,11 +57,10 @@ export default function DashboardWater(){
           <div className="mt-4 flex gap-3 justify-end">
             <button className="btn" onClick={()=>setStep(2)}>Back</button>
             <button className="btn btn-primary" onClick={()=>{
-              const orders = JSON.parse(localStorage.getItem('demoOrders')||'[]')
+              const orders = MockService.getOrders()
               const id = 'ORD-'+(1000+orders.length+1)
-              orders.unshift({id, date: new Date().toISOString().split('T')[0], qty, amount: subtotal, status:'Scheduled'})
-              localStorage.setItem('demoOrders', JSON.stringify(orders))
-              localStorage.setItem('demoNextDelivery', JSON.stringify({address:'Your address', slot:'Tomorrow 09:00-11:00', driver:'TBD'}))
+              MockService.addOrder({id, date: new Date().toISOString().split('T')[0], qty, amount: subtotal, status:'Scheduled'})
+              MockService.saveNextDelivery({address:'Your address', slot:'Tomorrow 09:00-11:00', driver:'TBD'})
               setStep(4)
             }}>Confirm & Pay</button>
           </div>

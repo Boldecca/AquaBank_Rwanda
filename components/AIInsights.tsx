@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { generateInsights, chatResponse } from './AIEngine'
+import { MockService } from './MockService'
 
 export default function AIInsights(){
   const [insights, setInsights] = useState<string[]>([])
@@ -11,14 +12,10 @@ export default function AIInsights(){
 
   useEffect(()=>{
     try{
-      const c = localStorage.getItem('demoCustomers')
-      const t = localStorage.getItem('demoTanks')
-      const o = localStorage.getItem('demoOrders')
-      const d = localStorage.getItem('demoDeliveries')
-      if(c) setCustomers(JSON.parse(c))
-      if(t) setTanks(JSON.parse(t))
-      if(o) setOrders(JSON.parse(o))
-      if(d) setDeliveries(JSON.parse(d))
+      setCustomers(MockService.getCustomers())
+      setTanks(MockService.getTanks())
+      setOrders(MockService.getOrders())
+      setDeliveries(MockService.getDeliveries())
     }catch(e){}
   },[])
 

@@ -1,5 +1,7 @@
+"use client"
 import DashboardShell from '../../../../components/DashboardShell'
 import { useState } from 'react'
+import { MockService } from '../../../../components/MockService'
 
 const PLANS = [
   {id:'basic',name:'Household Basic', price:'Demo RWF 5,000/mo', desc:'Essential monthly package.'},
@@ -8,15 +10,15 @@ const PLANS = [
 ]
 
 export default function SubscriptionPage(){
-  const [active,setActive] = useState<string | null>(localStorage.getItem('demoSub'))
+  const [active,setActive] = useState<string | null>(MockService.getSubscription())
 
   const subscribe = (id:string)=>{
-    localStorage.setItem('demoSub', id)
+    MockService.saveSubscription(id)
     setActive(id)
   }
 
   const cancel = ()=>{
-    localStorage.removeItem('demoSub')
+    MockService.saveSubscription(null)
     setActive(null)
   }
 

@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { processPayment } from './PaymentEngine'
+import { MockService } from './MockService'
 
 type Step = 0 | 1 | 2 | 3 | 4 | 5
 
@@ -30,13 +31,10 @@ export default function Checkout(){
     setPaymentStatus(rec)
     setOrderId(rec.orderId)
     setStep(4) // payment confirmation
-    // add demo order record
+    // add demo order record via MockService
     try{
-      const raw = localStorage.getItem('demoOrders')
-      const orders = raw ? JSON.parse(raw) : []
       const o = {id: rec.orderId, qty, date: new Date().toISOString().slice(0,10), location: addr || 'Kiosk', paymentMethod: paymentMethod, status: rec.status === 'success' ? 'Processing' : 'Pending'}
-      orders.unshift(o)
-      localStorage.setItem('demoOrders', JSON.stringify(orders))
+      MockService.addOrder(o)
     }catch(e){console.warn(e)}
   }
 

@@ -1,19 +1,13 @@
-'use client'
+ 'use client'
 import { useState, useEffect } from 'react'
-
-const sample = [
-  {id:'C-001', name:'Alice', type:'Household', location:'Remera', usage:1200, subscription:'Basic', status:'Active', lastOrder:'2026-08-01'},
-  {id:'C-002', name:'Bob', type:'Restaurant', location:'Kicukiro', usage:5000, subscription:'Business', status:'Active', lastOrder:'2026-08-10'},
-  {id:'C-003', name:'Cecile', type:'School', location:'Gacuriro', usage:8000, subscription:'Contract', status:'Inactive', lastOrder:'2026-06-20'}
-]
+import { MockService } from './MockService'
 
 export default function CustomersAdmin(){
-  const [customers,setCustomers] = useState(sample)
+  const [customers,setCustomers] = useState<any[]>([])
   const [q,setQ] = useState('')
 
   useEffect(()=>{
-    const stored = localStorage.getItem('demoCustomers')
-    if(stored) setCustomers(JSON.parse(stored))
+    setCustomers(MockService.getCustomers())
   },[])
 
   const filtered = customers.filter(c=> c.name.toLowerCase().includes(q.toLowerCase()) || c.location.toLowerCase().includes(q.toLowerCase()))
